@@ -82,6 +82,11 @@ class User extends Authenticatable
         'is_confirmed',
     ];
 
+    public function courseTables()
+    {
+        return $this->hasMany(CourseTable::class);
+    }
+
     /**
      * 帳號是否完成驗證
      *
