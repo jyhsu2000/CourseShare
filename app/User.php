@@ -41,6 +41,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read mixed $is_confirmed
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTable[] $courseTables
  */
 class User extends Authenticatable
 {
