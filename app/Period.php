@@ -10,15 +10,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $weekday
  * @property int $number
- * @property string $start_at
  * @property int $duration_second
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTime[] $courseTime
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereWeekday($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Period whereStartAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Period whereDurationSecond($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Period whereNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -28,8 +26,6 @@ class Period extends Model
     protected $fillable = [
         'weekday',
         'number',
-        'start_at',
-        'duration_second',
     ];
 
     public function courseTime()

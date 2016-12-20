@@ -17,8 +17,6 @@ class CreatePeriodsTable extends Migration
             $table->increments('id');
             $table->integer('weekday');
             $table->integer('number');
-            $table->time('start_at');
-            $table->integer('duration_second');
             $table->timestamps();
         });
     }
