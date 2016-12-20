@@ -38,7 +38,7 @@
                         {{ \App\Period::getTimeRangeString($number) }}
                     </td>
                     @foreach(range(0,6) as $weekday)
-                        @if($periodTable[$weekday][$number])
+                        @if(isset($periodTable[$weekday][$number]))
                             <td class="text-xs-center hover"
                                 data-href="{{ route('admin.period.show', $periodTable[$weekday][$number]) }}">
                                 <i class="fa fa-search-plus text-primary" aria-hidden="true"></i>
