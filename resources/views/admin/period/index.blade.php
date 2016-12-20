@@ -2,10 +2,22 @@
 
 @section('title', '節次管理')
 
+@section('css')
+    <style>
+        .bg {
+            background-color: #2a88bd !important;
+        }
+
+        td[data-href] {
+            cursor: pointer;
+        }
+    </style>
+@endsection
+
 @section('content')
     <h1>節次管理</h1>
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th class="text-xs-center">節次</th>
@@ -21,19 +33,36 @@
             <tbody>
             @foreach(range(1,14) as $number)
                 <tr>
-                    <td class="text-xs-center">
-                        第{{ $number }}節
+                    <td class="text-xs-center" style="white-space: nowrap">
+                        第{{ $number }}節<br/>
+                        {{ \App\Period::getTimeRangeString($number) }}
                     </td>
                     @foreach(range(0,6) as $weekday)
-                        <td class="text-xs-center">
-                            <a href="{{ route('admin.period.show', $periodTable[$weekday][$number]) }}">
-                                <i class="fa fa-search-plus" aria-hidden="true"></i>
-                            </a>
-                        </td>
+                        @if($periodTable[$weekday][$number])
+                            <td class="text-xs-center hover"
+                                data-href="{{ route('admin.period.show', $periodTable[$weekday][$number]) }}">
+
+                            </td>
+                        @else
+                            <td class="text-xs-center"></td>
+                        @endif
                     @endforeach
                 </tr>
             @endforeach
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(function () {
+            $('table tbody tr td.hover').hover(function () {
+                $(this).toggleClass('bg');
+            });
+            $('table tbody tr td.hover[data-href]').click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
 @endsection

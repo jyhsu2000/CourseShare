@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTime[] $courseTime
+ * @property-read string $start_at
+ * @property-read string $end_at
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereWeekday($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereNumber($value)
@@ -23,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Period extends Model
 {
+    protected static $duration_seconds = 50 * 60;
     protected $fillable = [
         'weekday',
         'number',
@@ -31,5 +35,39 @@ class Period extends Model
     public function courseTime()
     {
         return $this->belongsToMany(CourseTime::class);
+    }
+
+    public function getStartAtAttribute()
+    {
+        return static::getStartAt($this->number);
+    }
+
+    public static function getStartAt($number)
+    {
+        $carbon = new Carbon('8:10');
+        $carbon->addHours($number - 1);
+
+        return $carbon;
+    }
+
+    public function getEndAtAttribute()
+    {
+        return static::getEndAt($this->number);
+    }
+
+    public static function getEndAt($number)
+    {
+        $carbon = static::getStartAt($number);
+        $carbon->addSeconds(static::$duration_seconds);
+
+        return $carbon;
+    }
+
+    public static function getTimeRangeString($number)
+    {
+        $startAt = static::getStartAt($number);
+        $endAt = static::getEndAt($number);
+
+        return $startAt->format('H:i') . ' ~ ' . $endAt->format('H:i');
     }
 }
