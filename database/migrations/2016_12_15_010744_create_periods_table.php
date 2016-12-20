@@ -16,6 +16,7 @@ class CreatePeriodsTable extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('weekday');
+            $table->integer('number');
             $table->time('start_at');
             $table->integer('duration_second');
             $table->timestamps();

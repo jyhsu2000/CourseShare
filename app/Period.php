@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $weekday
+ * @property int $number
  * @property string $start_at
  * @property int $duration_second
  * @property \Carbon\Carbon $created_at
@@ -26,6 +27,7 @@ class Period extends Model
 {
     protected $fillable = [
         'weekday',
+        'number',
         'start_at',
         'duration_second',
     ];
