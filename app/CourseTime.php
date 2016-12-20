@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
  * App\CourseTime
  *
  * @property int $id
+ * @property int $user_id
  * @property int $course_id
  * @property int $teacher_id
  * @property string $location
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property-read \App\User $user
  * @property-read \App\Course $course
  * @property-read \App\Teacher $teacher
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTable[] $courseTable
@@ -28,10 +30,16 @@ use Illuminate\Database\Eloquent\Model;
 class CourseTime extends Model
 {
     protected $fillable = [
+        'user_id',
         'course_id',
         'teacher_id',
         'location',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function course()
     {

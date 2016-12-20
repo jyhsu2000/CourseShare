@@ -15,10 +15,13 @@ class CreateCourseTimesTable extends Migration
     {
         Schema::create('course_times', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('course_id');
             $table->unsignedInteger('teacher_id');
             $table->string('location')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
