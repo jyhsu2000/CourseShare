@@ -57,8 +57,10 @@
 @section('js')
     <script>
         $(function () {
-            $('table tbody tr td.hover').hover(function () {
-                $(this).toggleClass('bg');
+            $('table tbody tr td.hover').mouseenter(function () {
+                $(this).addClass('bg');
+            }).mouseleave(function () {
+                $(this).removeClass('bg');
             });
             $('table tbody tr td.hover[data-href]').click(function () {
                 window.document.location = $(this).data("href");
