@@ -8,24 +8,27 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th></th>
-                <th>週日</th>
-                <th>週一</th>
-                <th>週二</th>
-                <th>週三</th>
-                <th>週四</th>
-                <th>週五</th>
-                <th>週六</th>
+                <th class="text-xs-center">節次</th>
+                <th class="text-xs-center">週日</th>
+                <th class="text-xs-center">週一</th>
+                <th class="text-xs-center">週二</th>
+                <th class="text-xs-center">週三</th>
+                <th class="text-xs-center">週四</th>
+                <th class="text-xs-center">週五</th>
+                <th class="text-xs-center">週六</th>
             </tr>
             </thead>
             <tbody>
             @foreach(range(1,14) as $number)
                 <tr>
-                    <td>{{ $number }}</td>
+                    <td class="text-xs-center">
+                        第{{ $number }}節
+                    </td>
                     @foreach(range(0,6) as $weekday)
-                        <td>
-                            {{ $periodTable[$weekday][$number] }}
-                            <i class="fa fa-search-plus" aria-hidden="true"></i>
+                        <td class="text-xs-center">
+                            <a href="{{ route('admin.period.show', $periodTable[$weekday][$number]) }}">
+                                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                            </a>
                         </td>
                     @endforeach
                 </tr>

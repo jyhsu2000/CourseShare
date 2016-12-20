@@ -18,10 +18,12 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::group(['middleware' => ['auth', 'email']], function () {
     //一般使用者
     //管理員
-    //節次
-    //權限：period.manage
-    Route::group(['middleware' => 'permission:period.manage'], function () {
-        Route::resource('admin/period', 'AdminPeriodController');
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+        //節次
+        //權限：period.manage
+        Route::group(['middleware' => 'permission:period.manage'], function () {
+            Route::resource('period', 'AdminPeriodController');
+        });
     });
 
     //會員管理

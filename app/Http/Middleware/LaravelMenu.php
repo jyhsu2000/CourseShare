@@ -38,7 +38,7 @@ class LaravelMenu
                     /** @var \Lavary\Menu\Builder $courseManageMenu */
                     $courseManageMenu = $menu->add('課程管理', 'javascript:void(0)');
                     if (Entrust::can('period.manage')) {
-                        $courseManageMenu->add('節次管理', ['route' => 'period.index']);
+                        $courseManageMenu->add('節次管理', ['route' => 'admin.period.index']);
                     }
 
                     /** @var \Lavary\Menu\Builder $adminMenu */
