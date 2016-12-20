@@ -1,7 +1,7 @@
 <?php
 
-use App\Permission;
 use App\Role;
+use App\Permission;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateCourseManagePermissions extends Migration
@@ -13,7 +13,6 @@ class CreateCourseManagePermissions extends Migration
      */
     public function up()
     {
-
         $permCourseTableManage = Permission::create([
             'name'         => 'courseTable.manage',
             'display_name' => '管理課表',
