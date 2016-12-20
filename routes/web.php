@@ -16,6 +16,14 @@ Route::get('/', 'HomeController@index')->name('index');
 
 //會員（須完成信箱驗證）
 Route::group(['middleware' => ['auth', 'email']], function () {
+    //一般使用者
+    //管理員
+    //節次
+    //權限：period.manage
+    Route::group(['middleware' => 'permission:period.manage'], function () {
+        Route::resource('admin/period', 'AdminPeriodController');
+    });
+
     //會員管理
     //權限：user.manage、user.view
     Route::resource('user', 'UserController', [

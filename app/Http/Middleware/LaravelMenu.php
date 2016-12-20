@@ -35,6 +35,12 @@ class LaravelMenu
                 }
                 //管理員
                 if (Entrust::can('menu.view') and auth()->user()->isConfirmed) {
+                    /** @var \Lavary\Menu\Builder $courseManageMenu */
+                    $courseManageMenu = $menu->add('課程管理', 'javascript:void(0)');
+                    if (Entrust::can('period.manage')) {
+                        $courseManageMenu->add('節次管理', ['route' => 'period.index']);
+                    }
+
                     /** @var \Lavary\Menu\Builder $adminMenu */
                     $adminMenu = $menu->add('管理選單', 'javascript:void(0)');
 
