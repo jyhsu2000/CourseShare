@@ -41,7 +41,7 @@
                         @if($periodTable[$weekday][$number])
                             <td class="text-xs-center hover"
                                 data-href="{{ route('admin.period.show', $periodTable[$weekday][$number]) }}">
-
+                                <i class="fa fa-search-plus text-primary" aria-hidden="true"></i>
                             </td>
                         @else
                             <td class="text-xs-center"></td>
