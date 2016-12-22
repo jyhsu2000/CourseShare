@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\CourseTable;
-use App\DataTables\CourseTablesDataTable;
 use App\User;
+use App\CourseTable;
 use Illuminate\Http\Request;
+use App\DataTables\CourseTablesDataTable;
 
 class CourseTableController extends Controller
 {
