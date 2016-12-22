@@ -33,6 +33,7 @@ class LaravelMenu
                     $menu->add('尚未完成信箱驗證', ['route' => 'confirm-mail.resend'])
                         ->link->attr(['class' => 'text-danger']);
                 }
+                $menu->add('課表', ['route' => 'courseTable.index']);
                 //管理員
                 if (Entrust::can('menu.view') and auth()->user()->isConfirmed) {
                     /** @var \Lavary\Menu\Builder $courseManageMenu */

@@ -17,6 +17,12 @@ Route::get('/', 'HomeController@index')->name('index');
 //會員（須完成信箱驗證）
 Route::group(['middleware' => ['auth', 'email']], function () {
     //一般使用者
+    //課表
+    Route::resource('courseTable', 'CourseTableController', [
+        'except' => [
+            'create',
+        ],
+    ]);
     //管理員
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         //節次
