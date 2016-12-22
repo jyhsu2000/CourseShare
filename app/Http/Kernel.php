@@ -57,5 +57,6 @@ class Kernel extends HttpKernel
         'role'       => \Klaravel\Ntrust\Middleware\NtrustRole::class,
         'permission' => \Klaravel\Ntrust\Middleware\NtrustPermission::class,
         'ability'    => \Klaravel\Ntrust\Middleware\NtrustAbility::class,
+        'owner'      => \App\Http\Middleware\AbortIfNotOwner::class,
     ];
 }
