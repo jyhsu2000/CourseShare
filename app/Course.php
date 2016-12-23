@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \App\User $user
+ * @property-read \App\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTime[] $courseTimes
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereYear($value)
