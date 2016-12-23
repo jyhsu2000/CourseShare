@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $user_id
  * @property string $name
+ * @property int $order
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\User $user
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereOrder($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -26,6 +28,7 @@ class CourseTable extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'order',
     ];
 
     public function user()

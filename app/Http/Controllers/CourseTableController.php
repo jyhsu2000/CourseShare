@@ -41,7 +41,8 @@ class CourseTableController extends Controller
         /** @var User $user */
         $user = auth()->user();
         $user->courseTables()->save(new CourseTable([
-            'name' => $request->get('name'),
+            'name'  => $request->get('name'),
+            'order' => CourseTable::where('user_id', $user->id)->max('order') + 1 ?: 0,
         ]));
 
         return redirect()->route('courseTable.index')->with('global', '已建立課表');

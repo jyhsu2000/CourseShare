@@ -17,6 +17,7 @@ class CreateCourseTablesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('name');
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
