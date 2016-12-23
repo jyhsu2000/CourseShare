@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\CourseTable;
 use Illuminate\Http\Request;
-use App\DataTables\CourseTablesDataTable;
 
 class CourseTableController extends Controller
 {
