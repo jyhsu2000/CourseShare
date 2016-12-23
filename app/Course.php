@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -44,5 +45,15 @@ class Course extends Model
     public function courseTimes()
     {
         return $this->hasMany(CourseTime::class);
+    }
+
+    public static function getYearRange()
+    {
+        $startYear = 90;
+        $endYear = Carbon::now()->year - 1911;
+        $range = range($startYear, $endYear);
+        $array = array_combine($range, $range);
+
+        return $array;
     }
 }

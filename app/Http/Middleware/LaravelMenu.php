@@ -44,6 +44,9 @@ class LaravelMenu
                     if (Entrust::can('courseTable.manage')) {
                         $courseManageMenu->add('課表管理', ['route' => 'admin.courseTable.index']);
                     }
+                    if (Entrust::can('course.manage')) {
+                        $courseManageMenu->add('課程管理', ['route' => 'admin.course.index']);
+                    }
 
                     /** @var \Lavary\Menu\Builder $adminMenu */
                     $adminMenu = $menu->add('管理選單', 'javascript:void(0)');
