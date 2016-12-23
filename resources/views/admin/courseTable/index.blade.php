@@ -38,6 +38,7 @@
             </div>
         </div>
     </div>
+    {!! $dataTable->table() !!}
 @endsection
 
 @section('js')
@@ -48,4 +49,5 @@
             });
         </script>
     @endif
+    {!! $dataTable->scripts() !!}
 @endsection

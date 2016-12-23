@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\CourseTable;
+use App\DataTables\Admin\CourseTablesDataTable;
 use Illuminate\Http\Request;
-use App\DataTables\CourseTablesDataTable;
 
-class CourseTableController extends Controller
+class AdminCourseTimeController extends Controller
 {
-    /**
-     * CourseTableController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('owner:courseTable', ['only' => ['edit', 'update', 'destroy']]);
-    }
-
     /**
      * Display a listing of the resource.
      *
+     * @param CourseTablesDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
+    public function index(CourseTablesDataTable $dataTable)
+    {
+        return $dataTable->render('admin.courseTable.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function create()
     {
-        //TODO 改用Vue，加上排序功能
-        return view('courseTable.index');
+        //TODO
     }
 
     /**
@@ -36,16 +37,7 @@ class CourseTableController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-        /** @var User $user */
-        $user = auth()->user();
-        $user->courseTables()->save(new CourseTable([
-            'name' => $request->get('name'),
-        ]));
-
-        return redirect()->route('courseTable.index')->with('global', '已建立課表');
+        //TODO
     }
 
     /**
@@ -92,6 +84,6 @@ class CourseTableController extends Controller
     {
         $courseTable->delete();
 
-        return redirect()->route('courseTable.index')->with('global', '已刪除課表');
+        return redirect()->route('admin.courseTable.index')->with('global', '已刪除課表');
     }
 }

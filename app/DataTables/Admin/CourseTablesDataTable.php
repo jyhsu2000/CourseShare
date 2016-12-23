@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
 use App\CourseTable;
 use Yajra\Datatables\Services\DataTable;
@@ -17,7 +17,16 @@ class CourseTablesDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'courseTable.datatables.action')
+            ->addColumn('action', 'admin.courseTable.datatables.action')
+            ->editColumn('user_id', 'admin.courseTable.datatables.name')
+            ->filterColumn('user_id', function ($query, $keyword) {
+                $query->whereIn('user_id', function ($query) use ($keyword) {
+                    $query->select('users.id')
+                        ->from('users')
+                        ->join('course_tables', 'users.id', '=', 'course_tables.user_id')
+                        ->whereRaw('users.name LIKE ?', ['%' . $keyword . '%']);
+                });
+            })
             ->make(true);
     }
 
@@ -30,7 +39,7 @@ class CourseTablesDataTable extends DataTable
     {
         $user = auth()->user();
         /* @var Builder $query */
-        $query = CourseTable::where('user_id', $user->id);
+        $query = CourseTable::with('user');
 
         return $this->applyScopes($query);
     }
@@ -61,8 +70,9 @@ class CourseTablesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'   => ['title' => '#'],
-            'name' => ['title' => '課表名稱'],
+            'id'      => ['title' => '#'],
+            'user_id' => ['title' => '擁有者'],
+            'name'    => ['title' => '課表名稱'],
         ];
     }
 

@@ -41,6 +41,9 @@ class LaravelMenu
                     if (Entrust::can('period.manage')) {
                         $courseManageMenu->add('節次管理', ['route' => 'admin.period.index']);
                     }
+                    if (Entrust::can('courseTable.manage')) {
+                        $courseManageMenu->add('課表管理', ['route' => 'admin.courseTable.index']);
+                    }
 
                     /** @var \Lavary\Menu\Builder $adminMenu */
                     $adminMenu = $menu->add('管理選單', 'javascript:void(0)');

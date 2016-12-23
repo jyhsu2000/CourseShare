@@ -30,6 +30,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::group(['middleware' => 'permission:period.manage'], function () {
             Route::resource('period', 'AdminPeriodController');
         });
+        //課表
+        //權限：courseTable.manage
+        Route::group(['middleware' => 'permission:courseTable.manage'], function () {
+            Route::resource('courseTable', 'AdminCourseTimeController');
+        });
     });
 
     //會員管理
