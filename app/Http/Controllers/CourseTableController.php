@@ -23,7 +23,6 @@ class CourseTableController extends Controller
      */
     public function index()
     {
-        //TODO 改用Vue，加上排序功能
         return view('courseTable.index');
     }
 
@@ -93,5 +92,35 @@ class CourseTableController extends Controller
         $courseTable->delete();
 
         return redirect()->route('courseTable.index')->with('global', '已刪除課表');
+    }
+
+    public function data()
+    {
+        $courseTables = CourseTable::orderBy('order')->orderBy('id')->get();
+
+        return response()->json($courseTables);
+    }
+
+    public function sort(Request $request)
+    {
+        $idList = $request->get('idList');
+        $counter = 1;
+        foreach ($idList as $id) {
+            $courseTable = CourseTable::find($id);
+            if (!$courseTable) {
+                continue;
+            }
+            $courseTable->update([
+                'order' => $counter,
+            ]);
+            $counter++;
+        }
+        //回傳結果
+        $json = [
+            'success' => true,
+            'idList'  => $idList,
+        ];
+
+        return response()->json($json);
     }
 }

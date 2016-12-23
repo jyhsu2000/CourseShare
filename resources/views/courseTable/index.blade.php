@@ -38,6 +38,7 @@
             </div>
         </div>
     </div>
+    <course-table-panel api="{{ route('courseTable.index') }}"></course-table-panel>
 @endsection
 
 @section('js')

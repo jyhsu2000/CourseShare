@@ -18,6 +18,8 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::group(['middleware' => ['auth', 'email']], function () {
     //一般使用者
     //課表
+    Route::get('courseTable/data', 'CourseTableController@data')->name('courseTable.data');
+    Route::post('courseTable/sort', 'CourseTableController@sort')->name('courseTable.sort');
     Route::resource('courseTable', 'CourseTableController', [
         'except' => [
             'create',
