@@ -28,16 +28,12 @@
                 {{ Form::label('semester', '學期', ['class' => 'form-control-label']) }}
                 <div class="form-control">
                     <label class="custom-control custom-radio">
-                        <input id="semester1" name="semester" type="radio" class="custom-control-input" value="1"
-                               required
-                               @if($isEditMode && $course->semester==1) checked @endif>
+                        {{ Form::radio('semester', 1, null, ['class' => 'custom-control-input']) }}
                         <span class="custom-control-indicator"></span>
                         <span class="custom-control-description">上學期</span>
                     </label>
                     <label class="custom-control custom-radio">
-                        <input id="semester2" name="semester" type="radio" class="custom-control-input" value="2"
-                               required
-                               @if($isEditMode && $course->semester==2) checked @endif>
+                        {{ Form::radio('semester', 2, null, ['class' => 'custom-control-input']) }}
                         <span class="custom-control-indicator"></span>
                         <span class="custom-control-description">下學期</span>
                     </label>
