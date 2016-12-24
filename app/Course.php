@@ -58,6 +58,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Course extends Model
 {
+    public $incrementing = false;
     protected $fillable = [
         'user_id',
         'id',
