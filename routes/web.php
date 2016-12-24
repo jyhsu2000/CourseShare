@@ -42,6 +42,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::group(['middleware' => 'permission:course.manage'], function () {
             Route::resource('course', 'CourseController');
         });
+        //教師
+        //權限：teacher.manage
+        Route::group(['middleware' => 'permission:teacher.manage'], function () {
+            Route::resource('teacher', 'TeacherController');
+        });
     });
 
     //會員管理
