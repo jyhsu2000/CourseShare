@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Course;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\CoursesDataTable;
 
@@ -166,7 +166,7 @@ class CourseController extends Controller
                     $countSkip++;
                     continue;
                 }
-                $courseArray = (array)$course;
+                $courseArray = (array) $course;
                 try {
                     Course::create(array_merge([
                         'id' => $courseId,
@@ -178,11 +178,10 @@ class CourseController extends Controller
         }
         $message = "匯入完成（成功：{$countSuccess}，略過：{$countSkip}，總計：{$count}）";
         if (count($errorFiles)) {
-            $message .= "失敗檔案：" . implode('、', $errorFiles);
+            $message .= '失敗檔案：' . implode('、', $errorFiles);
         }
 
         return redirect()->route('admin.course.index')
             ->with('global', $message);
-
     }
 }
