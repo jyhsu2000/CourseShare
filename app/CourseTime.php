@@ -17,13 +17,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Course $course
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTable[] $courseTable
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Period[] $periods
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Teacher[] $teachers
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereCourseId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereLocation($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereUpdatedAt($value)
- * @mixin \Eloquent
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereUserId($value)
+ * @mixin \Eloquent
  */
 class CourseTime extends Model
 {
