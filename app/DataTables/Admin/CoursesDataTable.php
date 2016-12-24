@@ -28,6 +28,16 @@ class CoursesDataTable extends DataTable
     public function query()
     {
         $query = Course::query();
+        //學年
+        $year = \Request::get('year');
+        if ($year) {
+            $query->where('year', $year);
+        }
+        //學期
+        $semester = \Request::get('semester');
+        if ($semester) {
+            $query->where('semester', $semester);
+        }
 
         return $this->applyScopes($query);
     }

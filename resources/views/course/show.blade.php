@@ -83,5 +83,10 @@
                 </tr>
             </table>
         </div>
+        <div class="card-block">
+            <div class="text-xs-center">
+                <a href="{{ route('course.index') }}" class="btn btn-secondary">返回課程清單</a>
+            </div>
+        </div>
     </div>
 @endsection
