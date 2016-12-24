@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Course;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\DataTables\Admin\CoursesDataTable;
 
 class CourseController extends Controller
