@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Period;
 use Illuminate\Http\Request;
 
-class AdminPeriodController extends Controller
+class PeriodController extends Controller
 {
     /**
      * Display a listing of the resource.

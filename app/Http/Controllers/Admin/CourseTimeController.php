@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\CourseTable;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\Admin\CourseTablesDataTable;
 
-class AdminCourseTimeController extends Controller
+class CourseTimeController extends Controller
 {
     /**
      * Display a listing of the resource.
