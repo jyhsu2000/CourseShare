@@ -26,6 +26,6 @@ class Teacher extends Model
 
     public function courseTimes()
     {
-        return $this->hasMany(CourseTime::class);
+        return $this->belongsToMany(CourseTime::class);
     }
 }

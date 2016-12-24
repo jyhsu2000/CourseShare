@@ -52,4 +52,9 @@ class CourseTime extends Model
     {
         return $this->belongsToMany(Period::class);
     }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class);
+    }
 }
