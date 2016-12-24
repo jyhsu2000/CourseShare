@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\Admin\TeachersDataTable;
 use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\TeachersDataTable;
 
 class TeacherController extends Controller
 {
