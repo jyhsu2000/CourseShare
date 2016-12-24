@@ -18,7 +18,6 @@ class SetupForeignKeys extends Migration
         });
         Schema::table('course_times', function (Blueprint $table) {
             $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -34,7 +33,6 @@ class SetupForeignKeys extends Migration
         });
         Schema::table('course_times', function (Blueprint $table) {
             $table->dropForeign(['course_id']);
-            $table->dropForeign(['teacher_id']);
         });
     }
 }

@@ -17,7 +17,6 @@ class CreateCourseTimesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
             $table->string('course_id');
-            $table->unsignedInteger('teacher_id');
             $table->string('location')->nullable();
             $table->timestamps();
 
