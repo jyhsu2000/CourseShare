@@ -29,3 +29,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'last_login_ip'  => $faker->ipv4,
     ];
 });
+
+$factory->define(App\Teacher::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});
