@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         //課程
         //權限：course.manage
         Route::group(['middleware' => 'permission:course.manage'], function () {
+            Route::post('course/import', 'CourseController@import')->name('course.import');
             Route::resource('course', 'CourseController');
         });
         //教師

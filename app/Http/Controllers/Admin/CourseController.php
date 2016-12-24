@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Course;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\CoursesDataTable;
@@ -133,5 +134,55 @@ class CourseController extends Controller
         $course->delete();
 
         return redirect()->route('admin.course.index')->with('global', '課程已刪除');
+    }
+
+    public function import(Request $request)
+    {
+        $this->validate($request, [
+            'files' => 'required',
+        ]);
+        $uploadedFiles = $request->file('files');
+
+        $count = 0;
+        $countSuccess = 0;
+        $countSkip = 0;
+        $errorFiles = [];
+        foreach ($uploadedFiles as $uploadedFile) {
+            /* @var UploadedFile $uploadedFile */
+            $path = $uploadedFile->getPathname();
+            $fileContent = \File::get($path);
+            if (!$fileContent) {
+                $errorFiles[] = $uploadedFile->getClientOriginalName();
+                continue;
+            }
+            try {
+                $json = json_decode($fileContent);
+            } catch (\Exception $exception) {
+                $errorFiles[] = $uploadedFile->getClientOriginalName();
+                continue;
+            }
+            foreach ($json as $courseId => $course) {
+                if (Course::find($courseId)) {
+                    $countSkip++;
+                    continue;
+                }
+                $courseArray = (array)$course;
+                try {
+                    Course::create(array_merge([
+                        'id' => $courseId,
+                    ], $courseArray));
+                    $countSuccess++;
+                } catch (\Exception $exception) {
+                }
+            }
+        }
+        $message = "匯入完成（成功：{$countSuccess}，略過：{$countSkip}，總計：{$count}）";
+        if (count($errorFiles)) {
+            $message .= "失敗檔案：" . implode('、', $errorFiles);
+        }
+
+        return redirect()->route('admin.course.index')
+            ->with('global', $message);
+
     }
 }
