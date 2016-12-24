@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Query\Builder|\App\CourseTime whereUserId($value)
  */
 class CourseTime extends Model
 {
