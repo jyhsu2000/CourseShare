@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         //課表
         //權限：courseTable.manage
         Route::group(['middleware' => 'permission:courseTable.manage'], function () {
-            Route::resource('courseTable', 'CourseTimeController');
+            Route::resource('courseTable', 'CourseTableController');
         });
         //課程
         //權限：course.manage

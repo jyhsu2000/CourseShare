@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\CourseTablesDataTable;
 
-class CourseTimeController extends Controller
+class CourseTableController extends Controller
 {
     /**
      * Display a listing of the resource.
