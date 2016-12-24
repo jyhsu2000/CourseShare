@@ -58,10 +58,18 @@ class CoursesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'       => ['title' => '#'],
-            'year'     => ['title' => '學年度'],
-            'semester' => ['title' => '學期'],
-            'name'     => ['title' => '課程名稱'],
+//            'id'          => ['title' => '#'],
+//            'year'        => ['title' => '學年度'],
+//            'semester'    => ['title' => '學期'],
+            'scr_selcode' => ['title' => '選課代號'],
+            'sub_name'    => ['title' => '科目名稱'],
+            'scr_credit'  => ['title' => '學分'],
+            'scj_scr_mso' => ['title' => '必選修'],
+            'scr_examid'  => ['title' => '期中考'],
+            'scr_examfn'  => ['title' => '期末考'],
+            'scr_exambf'  => ['title' => '提前考'],
+            'cls_name'    => ['title' => '開課班級'],
+            'scr_period'  => ['title' => '上課時間/上課教室/授課教師'],
         ];
     }
 
