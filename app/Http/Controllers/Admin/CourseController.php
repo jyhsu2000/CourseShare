@@ -6,6 +6,7 @@ use App\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\CoursesDataTable;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
@@ -38,11 +39,26 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO: 調整欄位
         $this->validate($request, [
-            'name'     => 'required|max:255',
-            'year'     => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
-            'semester' => 'required|in:1,2',
+            'year'        => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
+            'semester'    => 'required|in:1,2',
+            'id'          => ['required', 'max:255', Rule::unique(app(Course::class)->getTable())],
+            'sub_name'    => 'required|max:255',
+            'scr_period'  => 'max:255',
+            'scj_scr_mso' => 'max:255',
+            'scr_acptcnt' => 'integer|min:0',
+            'scr_precnt'  => 'integer|min:0',
+            'scr_selcode' => 'max:255',
+            'scr_credit'  => 'integer|min:0',
+            'unt_ls'      => 'integer',
+            'scr_dup'     => 'max:255',
+            'scr_remarks' => 'max:255',
+            'cls_name'    => 'max:255',
+            'sub_id'      => 'max:255',
+            'cls_id'      => 'max:255',
+            'scr_exambf'  => 'max:255',
+            'scr_examid'  => 'max:255',
+            'scr_examfn'  => 'max:255',
         ]);
         $course = Course::create($request->all());
 
@@ -80,11 +96,26 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //TODO: 調整欄位
         $this->validate($request, [
-            'name'     => 'required|max:255',
-            'year'     => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
-            'semester' => 'required|in:1,2',
+            'year'        => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
+            'semester'    => 'required|in:1,2',
+            'id'          => ['required', 'max:255', Rule::unique(app(Course::class)->getTable())->ignore($course->id)],
+            'sub_name'    => 'required|max:255',
+            'scr_period'  => 'max:255',
+            'scj_scr_mso' => 'max:255',
+            'scr_acptcnt' => 'integer|min:0',
+            'scr_precnt'  => 'integer|min:0',
+            'scr_selcode' => 'max:255',
+            'scr_credit'  => 'integer|min:0',
+            'unt_ls'      => 'integer',
+            'scr_dup'     => 'max:255',
+            'scr_remarks' => 'max:255',
+            'cls_name'    => 'max:255',
+            'sub_id'      => 'max:255',
+            'cls_id'      => 'max:255',
+            'scr_exambf'  => 'max:255',
+            'scr_examid'  => 'max:255',
+            'scr_examfn'  => 'max:255',
         ]);
         $course->update($request->all());
 

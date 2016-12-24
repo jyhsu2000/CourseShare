@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $year 學年
  * @property int $semester 學期
  * @property string $scr_period 上課時間/上課教室/授課教師
- * @property int $scr_acptcnt 實收名額
  * @property string $sub_name 科目名稱
  * @property string $scj_scr_mso 必選修
+ * @property int $scr_acptcnt 實收名額
  * @property int $scr_precnt 開放名額
  * @property string $scr_selcode 選課代號
  * @property int $scr_credit 學分
@@ -37,9 +37,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereYear($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereSemester($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrPeriod($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrAcptcnt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereSubName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScjScrMso($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrAcptcnt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrPrecnt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrSelcode($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrCredit($value)
@@ -62,14 +62,12 @@ class Course extends Model
     protected $fillable = [
         'user_id',
         'id',
-        'year',
-        'semester',
         'year', //學年
         'semester', //學期
         'scr_period', //上課時間/上課教室/授課教師
-        'scr_acptcnt', //實收名額
         'sub_name', //科目名稱
         'scj_scr_mso', //必選修
+        'scr_acptcnt', //實收名額
         'scr_precnt', //開放名額
         'scr_selcode', //選課代號
         'scr_credit', //學分
