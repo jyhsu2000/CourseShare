@@ -63,24 +63,24 @@ class Course extends Model
         'id',
         'year',
         'semester',
-        'year',//學年
-        'semester',//學期
-        'scr_period',//上課時間/上課教室/授課教師
-        'scr_acptcnt',//實收名額
-        'sub_name',//科目名稱
-        'scj_scr_mso',//必選修
-        'scr_precnt',//開放名額
-        'scr_selcode',//選課代號
-        'scr_credit',//學分
+        'year', //學年
+        'semester', //學期
+        'scr_period', //上課時間/上課教室/授課教師
+        'scr_acptcnt', //實收名額
+        'sub_name', //科目名稱
+        'scj_scr_mso', //必選修
+        'scr_precnt', //開放名額
+        'scr_selcode', //選課代號
+        'scr_credit', //學分
         'unt_ls',
         'scr_dup',
-        'scr_remarks',//備註
-        'cls_name',//班級
-        'sub_id',//課程ID
-        'cls_id',//班級ID
-        'scr_exambf',//提前考
-        'scr_examid',//期中考
-        'scr_examfn',//期末考
+        'scr_remarks', //備註
+        'cls_name', //班級
+        'sub_id', //課程ID
+        'cls_id', //班級ID
+        'scr_exambf', //提前考
+        'scr_examid', //期中考
+        'scr_examfn', //期末考
     ];
 
     public function user()
