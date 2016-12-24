@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>課表清單</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createForm" data-whatever="@mdo">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createForm">
         新增課表
     </button>
     <div class="modal fade" id="createForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
