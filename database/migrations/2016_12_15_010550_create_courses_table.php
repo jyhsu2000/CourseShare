@@ -19,7 +19,6 @@ class CreateCoursesTable extends Migration
             $table->integer('year');
             $table->integer('semester');
             $table->string('name');
-            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
