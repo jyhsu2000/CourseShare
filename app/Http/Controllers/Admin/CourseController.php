@@ -73,7 +73,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //TODO
+        return view('admin.course.show', compact('course'));
     }
 
     /**

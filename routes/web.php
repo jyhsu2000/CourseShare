@@ -25,6 +25,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             'create',
         ],
     ]);
+    //課程
+    Route::resource('course', 'CourseController');
     //管理員
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
         //節次
