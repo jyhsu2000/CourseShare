@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\Admin\TeachersDataTable;
 use App\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,32 +12,29 @@ class TeacherController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param TeachersDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function index()
+    public function index(TeachersDataTable $dataTable)
     {
-        //TODO
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //TODO
+        return $dataTable->render('admin.teacher.index');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
+
+        $teacher = Teacher::create($request->all());
+
+        return redirect()->route('admin.teacher.index')->with('global', '教師已建立');
     }
 
     /**
@@ -81,6 +79,8 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //TODO
+        $teacher->delete();
+
+        return redirect()->route('admin.teacher.index')->with('global', '教師除');
     }
 }
