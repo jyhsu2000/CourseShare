@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\CourseTable;
 use App\User;
 use App\Course;
+use App\CourseTable;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\DataTables\CoursesDataTable;
@@ -189,5 +189,4 @@ class CourseController extends Controller
 
         return redirect()->route('course.show', $course)->with('global', '已從 ' . $courseTable->name . ' 移除');
     }
-
 }
