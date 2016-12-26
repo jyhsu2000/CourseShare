@@ -16,6 +16,7 @@ class CreateCoursePeriodTable extends Migration
         Schema::create('course_period', function (Blueprint $table) {
             $table->string('course_id');
             $table->unsignedInteger('period_id');
+            $table->string('location');
             $table->timestamps();
 
             $table->primary(['course_id', 'period_id']);
