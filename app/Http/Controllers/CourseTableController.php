@@ -13,7 +13,7 @@ class CourseTableController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('owner:courseTable', ['only' => ['edit', 'update', 'destroy']]);
+        $this->middleware('owner:courseTable', ['only' => ['edit', 'update', 'destroy', 'togglePublic']]);
     }
 
     /**
@@ -55,6 +55,10 @@ class CourseTableController extends Controller
      */
     public function show(CourseTable $courseTable)
     {
+        $user = auth()->user();
+        if ($courseTable->user_id != $user->id && !$courseTable->public && !$user->can('courseTable.manage')) {
+            abort(403);
+        }
         $periodTable = [];
         foreach ($courseTable->courses as $course) {
             foreach ($course->periods as $period) {
@@ -135,5 +139,13 @@ class CourseTableController extends Controller
         ];
 
         return response()->json($json);
+    }
+
+    public function togglePublic(CourseTable $courseTable)
+    {
+        $courseTable->update(['public' => !$courseTable->public]);
+        $message = '課表隱私設定已設定為 ' . ($courseTable->public ? '公開' : '私人');
+
+        return redirect()->route('courseTable.show', $courseTable)->with('global', $message);
     }
 }

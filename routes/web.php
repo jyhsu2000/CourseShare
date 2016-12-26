@@ -20,6 +20,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //課表
     Route::get('courseTable/data', 'CourseTableController@data')->name('courseTable.data');
     Route::post('courseTable/sort', 'CourseTableController@sort')->name('courseTable.sort');
+    Route::post('courseTable/togglePublic/{courseTable}', 'CourseTableController@togglePublic')
+        ->name('courseTable.togglePublic');
     Route::resource('courseTable', 'CourseTableController', [
         'except' => [
             'create',

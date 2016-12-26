@@ -7,6 +7,7 @@
         .bg {
             background-color: #2a88bd !important;
         }
+
         th, td {
             white-space: nowrap;
         }
@@ -32,7 +33,8 @@
                 <div class="modal-body">
                     <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label for="name" class="form-control-label">課表名稱：</label>
-                        <input id="name" type="text" name="name" value="{{ $courseTable->name ?: old('name') }}" required
+                        <input id="name" type="text" name="name" value="{{ $courseTable->name ?: old('name') }}"
+                               required
                                class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}">
                         @if ($errors->has('name'))
                             <span class="form-control-feedback">
@@ -49,6 +51,16 @@
             </div>
         </div>
     </div>
+    {!! Form::open(['route' => ['courseTable.togglePublic', $courseTable], 'style' => 'display: inline']) !!}
+    <button type="submit" class="btn btn-danger">
+        隱私設定：
+        @if($courseTable->public)
+            公開
+        @else
+            私人
+        @endif
+    </button>
+    {!! Form::close() !!}
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead>
@@ -75,7 +87,8 @@
                             @if(count($periodTable[$weekday][$number])==1)
                                 <td class="text-xs-center hover bg-info">
                                     @foreach($periodTable[$weekday][$number] as $periodCourse)
-                                        {{ link_to_route('course.show', $periodCourse->name, $periodCourse->id, ['target' => '_blank']) }}<br/>
+                                        {{ link_to_route('course.show', $periodCourse->name, $periodCourse->id, ['target' => '_blank']) }}
+                                        <br/>
                                         {{ $periodCourse->teacher }}<br/>
                                         {{ $periodCourse->location }}<br/>
                                     @endforeach
@@ -86,17 +99,20 @@
                                     <a href="javascript:void(0)" data-toggle="modal" data-target="#conflictForm">
                                         (顯示衝堂課程)
                                     </a>
-                                    <div class="modal fade" id="conflictForm" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal fade" id="conflictForm" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                     <h4 class="modal-title">衝堂課程</h4>
                                                 </div>
                                                 @foreach($periodTable[$weekday][$number] as $periodCourse)
-                                                    {{ link_to_route('course.show', $periodCourse->name, $periodCourse->id, ['target' => '_blank']) }}<br/>
+                                                    {{ link_to_route('course.show', $periodCourse->name, $periodCourse->id, ['target' => '_blank']) }}
+                                                    <br/>
                                                     {{ $periodCourse->teacher }}<br/>
                                                     {{ $periodCourse->location }}<br/>
                                                     <br/>

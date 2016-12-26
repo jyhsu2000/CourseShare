@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property string $name
  * @property int $order
+ * @property int $public
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\User $user
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereOrder($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CourseTable wherePublic($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -29,6 +31,7 @@ class CourseTable extends Model
         'user_id',
         'name',
         'order',
+        'public',
     ];
 
     public function user()
