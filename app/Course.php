@@ -134,11 +134,11 @@ class Course extends Model
                 $periods = $matches[2];
                 if (str_contains($periods, '-')) {
                     $periodRange = preg_split('/\-/', $periods);
-                    $startPeriod = (int)$periodRange[0];
-                    $endPeriod = (int)$periodRange[1];
+                    $startPeriod = (int) $periodRange[0];
+                    $endPeriod = (int) $periodRange[1];
                     $periodNumbers = range($startPeriod, $endPeriod);
                 } else {
-                    $periodNumbers = [(int)$periods];
+                    $periodNumbers = [(int) $periods];
                 }
                 foreach ($periodNumbers as $periodNumber) {
                     /* @var Period $period */
