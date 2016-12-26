@@ -47,6 +47,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        //FIXME: 課程ID跟他人創建課程重複時，依然會噴錯，需討論
         $this->validate($request, [
             'year'        => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
             'semester'    => 'required|in:1,2',
@@ -112,6 +113,7 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
+        //FIXME: 課程ID跟他人創建課程重複時，依然會噴錯，需討論
         $this->validate($request, [
             'year'        => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
             'semester'    => 'required|in:1,2',
