@@ -25,12 +25,6 @@ class CreateCourseManagePermissions extends Migration
             'description'  => '',
             'protection'   => false,
         ]);
-        $permCourseTimeManage = Permission::create([
-            'name'         => 'courseTime.manage',
-            'display_name' => '管理開課時間',
-            'description'  => '',
-            'protection'   => false,
-        ]);
         $permPeriodManage = Permission::create([
             'name'         => 'period.manage',
             'display_name' => '管理節次',
@@ -49,7 +43,6 @@ class CreateCourseManagePermissions extends Migration
         $admin = Role::where('name', 'Admin')->first();
         $admin->attachPermission($permCourseTableManage);
         $admin->attachPermission($permCourseManage);
-        $admin->attachPermission($permCourseTimeManage);
         $admin->attachPermission($permPeriodManage);
         $admin->attachPermission($permTeacherManage);
     }
@@ -63,7 +56,6 @@ class CreateCourseManagePermissions extends Migration
     {
         Permission::where('name', 'courseTable.manage')->delete();
         Permission::where('name', 'course.manage')->delete();
-        Permission::where('name', 'courseTime.manage')->delete();
         Permission::where('name', 'period.manage')->delete();
         Permission::where('name', 'teacher.manage')->delete();
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCourseTimePeriodTable extends Migration
+class CreateCourseCourseTableTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateCourseTimePeriodTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_time_period', function (Blueprint $table) {
-            $table->unsignedInteger('course_time_id');
-            $table->unsignedInteger('period_id');
+        Schema::create('course_course_table', function (Blueprint $table) {
+            $table->string('course_id');
+            $table->unsignedInteger('course_table_id');
             $table->timestamps();
 
-            $table->primary(['course_time_id', 'period_id']);
-            $table->foreign('course_time_id')->references('id')->on('course_times')
+            $table->primary(['course_table_id', 'course_id']);
+            $table->foreign('course_id')->references('id')->on('courses')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('period_id')->references('id')->on('periods')
+            $table->foreign('course_table_id')->references('id')->on('course_tables')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -33,6 +33,6 @@ class CreateCourseTimePeriodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_time_period');
+        Schema::dropIfExists('course_course_table');
     }
 }

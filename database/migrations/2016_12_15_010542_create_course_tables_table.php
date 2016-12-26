@@ -19,6 +19,8 @@ class CreateCourseTablesTable extends Migration
             $table->string('name');
             $table->integer('order')->default(0);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
