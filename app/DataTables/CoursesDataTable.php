@@ -3,8 +3,8 @@
 namespace App\DataTables;
 
 use App\Course;
-use Illuminate\Database\Eloquent\Builder;
 use Yajra\Datatables\Services\DataTable;
+use Illuminate\Database\Eloquent\Builder;
 
 class CoursesDataTable extends DataTable
 {
@@ -31,7 +31,7 @@ class CoursesDataTable extends DataTable
         $user = auth()->user();
         /** @var Builder $query */
         $query = Course::where(function ($query) use ($user) {
-            /** @var Builder $query */
+            /* @var Builder $query */
             $query->whereNull('user_id')
                 ->orWhere('user_id', $user->id);
         });

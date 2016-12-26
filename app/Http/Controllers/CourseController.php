@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
-use App\DataTables\CoursesDataTable;
 use App\User;
+use App\Course;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\DataTables\CoursesDataTable;
 
 class CourseController extends Controller
 {
