@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Period;
 use App\User;
 use App\CourseTable;
 use Illuminate\Http\Request;
