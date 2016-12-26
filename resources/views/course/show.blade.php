@@ -89,7 +89,54 @@
                 @if($course->user_id == auth()->user()->id)
                     <a href="{{ route('course.edit', $course) }}" class="btn btn-primary">編輯課程</a>
                 @endif
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Form">
+                    新增至課表/從課表移除
+                </button>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="Form" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">新增至課表/從課表移除</h4>
+                </div>
+                {{ Form::open(['route' => ['course.addToTable', $course]]) }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ Form::select('course_table_id', auth()->user()->courseTables->pluck('name', 'id'), old('course_table_id'), ['class' => 'form-control']) }}
+                        @if ($errors->has('course_table_id'))
+                            <br/>
+                            <span class="form-control-feedback">
+                                <strong>{{ $errors->first('course_table_id') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" formaction="{{ route('course.addToTable', $course) }}">
+                        新增至課表
+                    </button>
+                    <button type="submit" class="btn btn-danger" formaction="{{ route('course.removeFromTable', $course) }}">
+                        從課表移除
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    @if(session('errors'))
+        <script>
+            $(function () {
+                $('#Form').modal({show: true});
+            });
+        </script>
+    @endif
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CourseTable;
 use App\User;
 use App\Course;
 use Illuminate\Http\Request;
@@ -158,4 +159,35 @@ class CourseController extends Controller
 
         return redirect()->route('course.index')->with('global', '課程已刪除');
     }
+
+    public function addToTable(Request $request, Course $course)
+    {
+        $this->validate($request, [
+            'course_table_id' => 'required|exists:course_tables,id',
+        ]);
+        $courseTable = CourseTable::find($request->get('course_table_id'));
+        $user = auth()->user();
+        if ($courseTable->user_id != $user->id) {
+            return redirect()->route('course.show', $course)->with('warning', '僅能選擇自己的課表');
+        }
+        $courseTable->courses()->syncWithoutDetaching([$course->id]);
+
+        return redirect()->route('course.show', $course)->with('global', '已新增至 ' . $courseTable->name);
+    }
+
+    public function removeFromTable(Request $request, Course $course)
+    {
+        $this->validate($request, [
+            'course_table_id' => 'required|exists:course_tables,id',
+        ]);
+        $courseTable = CourseTable::find($request->get('course_table_id'));
+        $user = auth()->user();
+        if ($courseTable->user_id != $user->id) {
+            return redirect()->route('course.show', $course)->with('warning', '僅能選擇自己的課表');
+        }
+        $courseTable->courses()->detach($course);
+
+        return redirect()->route('course.show', $course)->with('global', '已從 ' . $courseTable->name . ' 移除');
+    }
+
 }
