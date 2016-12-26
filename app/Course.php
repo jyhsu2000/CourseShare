@@ -101,7 +101,7 @@ class Course extends Model
 
     public function periods()
     {
-        return $this->belongsToMany(Period::class);
+        return $this->belongsToMany(Period::class)->withPivot('location');
     }
 
     public static function getYearRange()
@@ -112,5 +112,55 @@ class Course extends Model
         $array = array_combine($range, $range);
 
         return $array;
+    }
+
+    public function parse()
+    {
+        //上課時間/上課教室/授課教師
+        $scr_period = $this->scr_period;
+        $terms = preg_split('/\\s+/', $scr_period);
+        $termCount = count($terms);
+        $hasTeacher = $termCount % 2 == 1;
+        $periodIds = [];
+        for ($i = 0; $i < $termCount / 2; $i += 2) {
+            $location = $terms[$i + 1];
+            $weekdayAndPeriods = $terms[$i];
+            $matchCount = preg_match('/\((.*)\)(\d+(?:-\d+)?)/', $weekdayAndPeriods, $matches);
+            if ($matchCount) {
+                //星期幾
+                $weekday = $matches[1];
+                $weekdayNumber = array_search($weekday, ['日', '一', '二', '三', '四', '五', '六']);
+                //第幾節
+                $periods = $matches[2];
+                if (str_contains($periods, '-')) {
+                    $periodRange = preg_split('/\-/', $periods);
+                    $startPeriod = (int)$periodRange[0];
+                    $endPeriod = (int)$periodRange[1];
+                    $periodNumbers = range($startPeriod, $endPeriod);
+                } else {
+                    $periodNumbers = [(int)$periods];
+                }
+                foreach ($periodNumbers as $periodNumber) {
+                    /* @var Period $period */
+                    $period = Period::firstOrCreate(['weekday' => $weekdayNumber, 'number' => $periodNumber]);
+                    $periodIds[$period->id] = ['location' => $location];
+                }
+            }
+        }
+        $this->periods()->sync($periodIds);
+        $teacherIds = [];
+        if ($hasTeacher) {
+            //老師
+            $teacherNameString = $terms[$termCount - 1];
+            $teacherNames = explode(',', $teacherNameString);
+            foreach ($teacherNames as $teacherName) {
+                /* @var Teacher $teacher */
+                $teacher = Teacher::firstOrCreate(['name' => $teacherName]);
+                $teacherIds[] = $teacher->id;
+            }
+        }
+        $this->teachers()->sync($teacherIds);
+
+        return $this->scr_period;
     }
 }

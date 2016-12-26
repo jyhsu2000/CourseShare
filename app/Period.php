@@ -33,7 +33,7 @@ class Period extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class)->withPivot('location');
     }
 
     public function getStartAtAttribute()
