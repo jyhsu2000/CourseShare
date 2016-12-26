@@ -168,11 +168,11 @@ class CourseController extends Controller
         $courseTable = CourseTable::find($request->get('course_table_id'));
         $user = auth()->user();
         if ($courseTable->user_id != $user->id) {
-            return redirect()->route('course.show', $course)->with('warning', '僅能選擇自己的課表');
+            return redirect()->back()->with('warning', '僅能選擇自己的課表');
         }
         $courseTable->courses()->syncWithoutDetaching([$course->id]);
 
-        return redirect()->route('course.show', $course)->with('global', '已新增至 ' . $courseTable->name);
+        return redirect()->back()->with('global', '已新增至 ' . $courseTable->name);
     }
 
     public function removeFromTable(Request $request, Course $course)
@@ -183,10 +183,10 @@ class CourseController extends Controller
         $courseTable = CourseTable::find($request->get('course_table_id'));
         $user = auth()->user();
         if ($courseTable->user_id != $user->id) {
-            return redirect()->route('course.show', $course)->with('warning', '僅能選擇自己的課表');
+            return redirect()->back()->with('warning', '僅能選擇自己的課表');
         }
         $courseTable->courses()->detach($course);
 
-        return redirect()->route('course.show', $course)->with('global', '已從 ' . $courseTable->name . ' 移除');
+        return redirect()->back()->with('global', '已從 ' . $courseTable->name . ' 移除');
     }
 }

@@ -104,6 +104,14 @@ class Course extends Model
         return $this->belongsToMany(Period::class)->withPivot('location');
     }
 
+    public function getTeacherNamesAttribute()
+    {
+        $teacherNameArray = $this->teachers->pluck('name')->toArray();
+        $teacherName = implode('、', $teacherNameArray);
+
+        return $teacherName;
+    }
+
     public static function getYearRange()
     {
         $startYear = 90;

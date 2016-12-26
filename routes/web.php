@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::resource('courseTable', 'CourseTableController', [
         'except' => [
             'create',
+            'edit',
         ],
     ]);
     //課程

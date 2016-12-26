@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Period;
 use App\User;
 use App\CourseTable;
 use Illuminate\Http\Request;
@@ -55,18 +56,24 @@ class CourseTableController extends Controller
      */
     public function show(CourseTable $courseTable)
     {
-        //TODO
-    }
+        $periodTable = [];
+        foreach ($courseTable->courses as $course) {
+            foreach ($course->periods as $period) {
+                $weekday = $period->weekday;
+                $number = $period->number;
+                if (!isset($periodTable[$weekday][$number])) {
+                    $periodTable[$weekday][$number] = [];
+                }
+                $periodCourseItem = new \stdClass();
+                $periodCourseItem->id = $course->id;
+                $periodCourseItem->name = $course->sub_name;
+                $periodCourseItem->teacher = $course->teacher_names;
+                $periodCourseItem->location = $period->pivot->location;
+                $periodTable[$weekday][$number][] = $periodCourseItem;
+            }
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param CourseTable $courseTable
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CourseTable $courseTable)
-    {
-        //TODO
+        return view('courseTable.show', compact(['courseTable', 'periodTable']));
     }
 
     /**
@@ -78,7 +85,14 @@ class CourseTableController extends Controller
      */
     public function update(Request $request, CourseTable $courseTable)
     {
-        //TODO
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
+        $courseTable->update([
+            'name' => $request->get('name'),
+        ]);
+
+        return redirect()->route('courseTable.show', compact('courseTable'))->with('global', '已修改課表名稱');
     }
 
     /**
