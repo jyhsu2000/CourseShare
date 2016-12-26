@@ -137,7 +137,7 @@
                         </td>
                         <td>{{ $course->scr_period }}</td>
                         <td>
-                            {{ Form::open(['route' => ['course.removeFromTable', $course]]) }}
+                            {{ Form::open(['route' => ['course.removeFromTable', $course], 'onsubmit' => 'return confirm("確定要從課表移除嗎？")']) }}
                             {{ Form::hidden('course_table_id', $courseTable->id) }}
                             <button type="submit" class="btn btn-danger">從課表移除</button>
                             {{ Form::close() }}
