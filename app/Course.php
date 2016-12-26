@@ -122,41 +122,55 @@ class Course extends Model
         $termCount = count($terms);
         $hasTeacher = $termCount % 2 == 1;
         $periodIds = [];
+        //錯誤標記（若發生錯誤，強制清除節次資料與教師資料）
+        $errorFlag = false;
         for ($i = 0; $i < $termCount / 2; $i += 2) {
-            $location = $terms[$i + 1];
-            $weekdayAndPeriods = $terms[$i];
-            $matchCount = preg_match('/\((.*)\)(\d+(?:-\d+)?)/', $weekdayAndPeriods, $matches);
-            if ($matchCount) {
-                //星期幾
-                $weekday = $matches[1];
-                $weekdayNumber = array_search($weekday, ['日', '一', '二', '三', '四', '五', '六']);
-                //第幾節
-                $periods = $matches[2];
-                if (str_contains($periods, '-')) {
-                    $periodRange = preg_split('/\-/', $periods);
-                    $startPeriod = (int) $periodRange[0];
-                    $endPeriod = (int) $periodRange[1];
-                    $periodNumbers = range($startPeriod, $endPeriod);
-                } else {
-                    $periodNumbers = [(int) $periods];
+            try {
+                $location = $terms[$i + 1];
+                $weekdayAndPeriods = $terms[$i];
+                $matchCount = preg_match('/\((.*)\)(\d+(?:-\d+)?)/', $weekdayAndPeriods, $matches);
+                if ($matchCount) {
+                    //星期幾
+                    $weekday = $matches[1];
+                    $weekdayNumber = array_search($weekday, ['日', '一', '二', '三', '四', '五', '六']);
+                    //第幾節
+                    $periods = $matches[2];
+                    if (str_contains($periods, '-')) {
+                        $periodRange = preg_split('/\-/', $periods);
+                        $startPeriod = (int) $periodRange[0];
+                        $endPeriod = (int) $periodRange[1];
+                        $periodNumbers = range($startPeriod, $endPeriod);
+                    } else {
+                        $periodNumbers = [(int) $periods];
+                    }
+                    foreach ($periodNumbers as $periodNumber) {
+                        /* @var Period $period */
+                        $period = Period::firstOrCreate(['weekday' => $weekdayNumber, 'number' => $periodNumber]);
+                        $periodIds[$period->id] = ['location' => $location];
+                    }
                 }
-                foreach ($periodNumbers as $periodNumber) {
-                    /* @var Period $period */
-                    $period = Period::firstOrCreate(['weekday' => $weekdayNumber, 'number' => $periodNumber]);
-                    $periodIds[$period->id] = ['location' => $location];
-                }
+            } catch (\Exception $exception) {
+                //發生錯誤時，標記錯誤，清除節次資料，並中斷剖析
+                $errorFlag = true;
+                $periodIds = [];
+                break;
             }
         }
         $this->periods()->sync($periodIds);
         $teacherIds = [];
-        if ($hasTeacher) {
-            //老師
-            $teacherNameString = $terms[$termCount - 1];
-            $teacherNames = explode(',', $teacherNameString);
-            foreach ($teacherNames as $teacherName) {
-                /* @var Teacher $teacher */
-                $teacher = Teacher::firstOrCreate(['name' => $teacherName]);
-                $teacherIds[] = $teacher->id;
+        //老師（若已發生錯誤則不剖析）
+        if ($hasTeacher && !$errorFlag) {
+            try {
+                $teacherNameString = $terms[$termCount - 1];
+                $teacherNames = explode(',', $teacherNameString);
+                foreach ($teacherNames as $teacherName) {
+                    /* @var Teacher $teacher */
+                    $teacher = Teacher::firstOrCreate(['name' => $teacherName]);
+                    $teacherIds[] = $teacher->id;
+                }
+            } catch (\Exception $exception) {
+                //發生錯誤時，清除教師資料
+                $teacherIds = [];
             }
         }
         $this->teachers()->sync($teacherIds);
