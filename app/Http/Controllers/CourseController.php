@@ -3,18 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\DataTables\CoursesDataTable;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
     /**
+     * CourseTableController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('owner:course', ['only' => ['edit', 'update', 'destroy']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param CoursesDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function index()
+    public function index(CoursesDataTable $dataTable)
     {
-        //TODO
+        return $dataTable->render('course.index');
     }
 
     /**
@@ -24,7 +36,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('course.create-or-edit');
     }
 
     /**
@@ -35,7 +47,38 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'year'        => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
+            'semester'    => 'required|in:1,2',
+            'id'          => ['required', 'max:255', Rule::unique(app(Course::class)->getTable())],
+            'sub_name'    => 'required|max:255',
+            'scr_period'  => 'max:255',
+            'scj_scr_mso' => 'max:255',
+            'scr_acptcnt' => 'integer|min:0',
+            'scr_precnt'  => 'integer|min:0',
+            'scr_selcode' => 'max:255',
+            'scr_credit'  => 'integer|min:0',
+            'unt_ls'      => 'integer',
+            'scr_dup'     => 'max:255',
+            'scr_remarks' => 'max:255',
+            'cls_name'    => 'max:255',
+            'sub_id'      => 'max:255',
+            'cls_id'      => 'max:255',
+            'scr_exambf'  => 'max:255',
+            'scr_examid'  => 'max:255',
+            'scr_examfn'  => 'max:255',
+        ]);
+        $properties = array_merge($request->all(), [
+            'scr_acptcnt' => (int) $request->get('scr_acptcnt'),
+            'scr_precnt'  => (int) $request->get('scr_precnt'),
+            'scr_credit'  => (int) $request->get('scr_credit'),
+            'unt_ls'      => (int) $request->get('unt_ls'),
+        ]);
+        /* @var User $user */
+        $user = auth()->user();
+        $course = $user->courses()->save(new Course($properties));
+
+        return redirect()->route('course.show', $course)->with('global', '課程已建立');
     }
 
     /**
@@ -57,7 +100,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //TODO
+        return view('course.create-or-edit', compact('course'));
     }
 
     /**
@@ -69,7 +112,36 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //TODO
+        $this->validate($request, [
+            'year'        => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
+            'semester'    => 'required|in:1,2',
+            'id'          => ['required', 'max:255', Rule::unique(app(Course::class)->getTable())->ignore($course->id)],
+            'sub_name'    => 'required|max:255',
+            'scr_period'  => 'max:255',
+            'scj_scr_mso' => 'max:255',
+            'scr_acptcnt' => 'integer|min:0',
+            'scr_precnt'  => 'integer|min:0',
+            'scr_selcode' => 'max:255',
+            'scr_credit'  => 'integer|min:0',
+            'unt_ls'      => 'integer',
+            'scr_dup'     => 'max:255',
+            'scr_remarks' => 'max:255',
+            'cls_name'    => 'max:255',
+            'sub_id'      => 'max:255',
+            'cls_id'      => 'max:255',
+            'scr_exambf'  => 'max:255',
+            'scr_examid'  => 'max:255',
+            'scr_examfn'  => 'max:255',
+        ]);
+        $properties = array_merge($request->all(), [
+            'scr_acptcnt' => (int) $request->get('scr_acptcnt'),
+            'scr_precnt'  => (int) $request->get('scr_precnt'),
+            'scr_credit'  => (int) $request->get('scr_credit'),
+            'unt_ls'      => (int) $request->get('unt_ls'),
+        ]);
+        $course->update($properties);
+
+        return redirect()->route('course.show', $course)->with('global', '課程已更新');
     }
 
     /**
@@ -80,6 +152,8 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //TODO
+        $course->delete();
+
+        return redirect()->route('course.index')->with('global', '課程已刪除');
     }
 }

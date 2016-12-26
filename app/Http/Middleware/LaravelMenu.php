@@ -34,6 +34,7 @@ class LaravelMenu
                         ->link->attr(['class' => 'text-danger']);
                 }
                 $menu->add('課表', ['route' => 'courseTable.index']);
+                $menu->add('課程清單', ['route' => 'course.index']);
                 //管理員
                 if (Entrust::can('menu.view') and auth()->user()->isConfirmed) {
                     /** @var \Lavary\Menu\Builder $courseManageMenu */

@@ -86,6 +86,9 @@
         <div class="card-block">
             <div class="text-xs-center">
                 <a href="{{ route('course.index') }}" class="btn btn-secondary">返回課程清單</a>
+                @if($course->user_id == auth()->user()->id)
+                    <a href="{{ route('course.edit', $course) }}" class="btn btn-primary">編輯課程</a>
+                @endif
             </div>
         </div>
     </div>

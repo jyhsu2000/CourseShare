@@ -16,9 +16,9 @@
         </div>
         <div class="card-block">
             @if($isEditMode)
-                {{ Form::model($course, ['route' => ['admin.course.update', $course], 'method' => 'put']) }}
+                {{ Form::model($course, ['route' => ['course.update', $course], 'method' => 'put']) }}
             @else
-                {{ Form::open(['route' => 'admin.course.store']) }}
+                {{ Form::open(['route' => 'course.store']) }}
             @endif
             <div class="form-group">
                 {{ Form::label('year', '學年度', ['class' => 'form-control-label']) }}
@@ -152,9 +152,9 @@
             <div class="form-group row">
                 <div class="text-xs-center">
                     @if($isEditMode)
-                        <a href="{{ route('admin.course.show', $course) }}" class="btn btn-secondary">返回</a>
+                        <a href="{{ route('course.show', $course) }}" class="btn btn-secondary">返回</a>
                     @else
-                        <a href="{{ route('admin.course.index') }}" class="btn btn-secondary">返回</a>
+                        <a href="{{ route('course.index') }}" class="btn btn-secondary">返回</a>
                     @endif
                     <button type="submit" class="btn btn-primary">確認</button>
                 </div>

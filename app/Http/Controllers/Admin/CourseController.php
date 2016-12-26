@@ -61,7 +61,13 @@ class CourseController extends Controller
             'scr_examid'  => 'max:255',
             'scr_examfn'  => 'max:255',
         ]);
-        $course = Course::create($request->all());
+        $properties = array_merge($request->all(), [
+            'scr_acptcnt' => (int) $request->get('scr_acptcnt'),
+            'scr_precnt'  => (int) $request->get('scr_precnt'),
+            'scr_credit'  => (int) $request->get('scr_credit'),
+            'unt_ls'      => (int) $request->get('unt_ls'),
+        ]);
+        $course = Course::create($properties);
 
         return redirect()->route('admin.course.show', $course)->with('global', '課程已建立');
     }
@@ -118,7 +124,13 @@ class CourseController extends Controller
             'scr_examid'  => 'max:255',
             'scr_examfn'  => 'max:255',
         ]);
-        $course->update($request->all());
+        $properties = array_merge($request->all(), [
+            'scr_acptcnt' => (int) $request->get('scr_acptcnt'),
+            'scr_precnt'  => (int) $request->get('scr_precnt'),
+            'scr_credit'  => (int) $request->get('scr_credit'),
+            'unt_ls'      => (int) $request->get('unt_ls'),
+        ]);
+        $course->update($properties);
 
         return redirect()->route('admin.course.show', $course)->with('global', '課程已更新');
     }

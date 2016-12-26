@@ -88,6 +88,11 @@ class User extends Authenticatable
         return $this->hasMany(CourseTable::class);
     }
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
     /**
      * 帳號是否完成驗證
      *

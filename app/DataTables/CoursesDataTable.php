@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables\Admin;
+namespace App\DataTables;
 
 use App\Course;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,7 +17,7 @@ class CoursesDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'admin.course.datatables.action')
+            ->addColumn('action', 'course.datatables.action')
             ->make(true);
     }
 
@@ -28,8 +28,13 @@ class CoursesDataTable extends DataTable
      */
     public function query()
     {
-        /* @var Builder $query */
-        $query = Course::whereNull('user_id');
+        $user = auth()->user();
+        /** @var Builder $query */
+        $query = Course::where(function ($query) use ($user) {
+            /** @var Builder $query */
+            $query->whereNull('user_id')
+                ->orWhere('user_id', $user->id);
+        });
         //學年
         $year = \Request::get('year');
         if ($year) {
