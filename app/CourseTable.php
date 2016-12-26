@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\User $user
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTime[] $courseTimes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Course[] $courses
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\CourseTable whereName($value)
@@ -36,8 +36,8 @@ class CourseTable extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function courseTimes()
+    public function courses()
     {
-        return $this->belongsToMany(CourseTime::class);
+        return $this->belongsToMany(Course::class);
     }
 }

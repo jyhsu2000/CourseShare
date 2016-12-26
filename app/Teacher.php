@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTime[] $courseTimes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Course[] $courses
  * @method static \Illuminate\Database\Query\Builder|\App\Teacher whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Teacher whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Teacher whereCreatedAt($value)
@@ -24,8 +24,8 @@ class Teacher extends Model
         'name',
     ];
 
-    public function courseTimes()
+    public function courses()
     {
-        return $this->belongsToMany(CourseTime::class);
+        return $this->belongsToMany(Course::class);
     }
 }

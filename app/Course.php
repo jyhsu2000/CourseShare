@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Course
  *
- * @property int $id 課程編號
+ * @property string $id 課程編號
  * @property int $user_id
  * @property int $year 學年
  * @property int $semester 學期
  * @property string $scr_period 上課時間/上課教室/授課教師
+ * @property int $scr_acptcnt 實收名額
  * @property string $sub_name 科目名稱
  * @property string $scj_scr_mso 必選修
- * @property int $scr_acptcnt 實收名額
  * @property int $scr_precnt 開放名額
  * @property string $scr_selcode 選課代號
  * @property int $scr_credit 學分
@@ -31,15 +31,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\User $user
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTime[] $courseTimes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTable[] $courseTables
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Teacher[] $teachers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Period[] $periods
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereYear($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereSemester($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrPeriod($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrAcptcnt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereSubName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScjScrMso($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrAcptcnt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrPrecnt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrSelcode($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereScrCredit($value)
@@ -87,9 +89,19 @@ class Course extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function courseTimes()
+    public function courseTables()
     {
-        return $this->hasMany(CourseTime::class);
+        return $this->belongsToMany(CourseTable::class);
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class);
+    }
+
+    public function periods()
+    {
+        return $this->belongsToMany(Period::class);
     }
 
     public static function getYearRange()

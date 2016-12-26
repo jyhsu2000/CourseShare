@@ -11,12 +11,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $weekday
  * @property int $number
- * @property int $duration_second
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTime[] $courseTime
- * @property-read string $start_at
- * @property-read string $end_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Course[] $courses
+ * @property-read mixed $start_at
+ * @property-read mixed $end_at
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereWeekday($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Period whereNumber($value)
@@ -32,9 +31,9 @@ class Period extends Model
         'number',
     ];
 
-    public function courseTime()
+    public function courses()
     {
-        return $this->belongsToMany(CourseTime::class);
+        return $this->belongsToMany(Course::class);
     }
 
     public function getStartAtAttribute()
