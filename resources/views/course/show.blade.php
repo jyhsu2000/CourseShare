@@ -8,80 +8,78 @@
             {{ $course->sub_name }} - 課程資訊
         </div>
         <div class="card-block">
-            <table class="table table-hover">
-                <tr>
-                    <td class="text-md-right">名稱：</td>
-                    <td>{{ $course->sub_name }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">學年：</td>
-                    <td>{{ $course->year }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">學期：</td>
-                    <td>{{ $course->semester }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">上課時間　<br/>/上課教室　<br/>/授課教師：</td>
-                    <td>{{ $course->scr_period }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">必選修：</td>
-                    <td>{{ $course->scj_scr_mso }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">實收名額：</td>
-                    <td>{{ $course->scr_acptcnt }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">開放名額：</td>
-                    <td>{{ $course->scr_precnt }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">選課代號：</td>
-                    <td>{{ $course->scr_selcode }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">學分：</td>
-                    <td>{{ $course->scr_credit }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">unt_ls：</td>
-                    <td>{{ $course->unt_ls }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">scr_dup：</td>
-                    <td>{{ $course->scr_dup }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">備註：</td>
-                    <td>{{ $course->scr_remarks }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">班級：</td>
-                    <td>{{ $course->cls_name }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">課程ID：</td>
-                    <td>{{ $course->sub_id }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">班級ID：</td>
-                    <td>{{ $course->cls_id }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">提前考：</td>
-                    <td>{{ $course->scr_exambf }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">期中考：</td>
-                    <td>{{ $course->scr_examid }}</td>
-                </tr>
-                <tr>
-                    <td class="text-md-right">期末考：</td>
-                    <td>{{ $course->scr_examfn }}</td>
-                </tr>
-            </table>
+            <div class="row">
+                <div class="col-md-4 text-md-right">名稱：</div>
+                <div class="col-md-8">{{ $course->sub_name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">學年：</div>
+                <div class="col-md-8">{{ $course->year }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">學期：</div>
+                <div class="col-md-8">{{ $course->semester }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">上課時間/上課教室/授課教師：</div>
+                <div class="col-md-8">{{ $course->scr_period }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">必選修：</div>
+                <div class="col-md-8">{{ $course->scj_scr_mso }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">實收名額：</div>
+                <div class="col-md-8">{{ $course->scr_acptcnt }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">開放名額：</div>
+                <div class="col-md-8">{{ $course->scr_precnt }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">選課代號：</div>
+                <div class="col-md-8">{{ $course->scr_selcode }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">學分：</div>
+                <div class="col-md-8">{{ $course->scr_credit }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">unt_ls：</div>
+                <div class="col-md-8">{{ $course->unt_ls }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">scr_dup：</div>
+                <div class="col-md-8">{{ $course->scr_dup }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">備註：</div>
+                <div class="col-md-8">{{ $course->scr_remarks }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">班級：</div>
+                <div class="col-md-8">{{ $course->cls_name }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">課程ID：</div>
+                <div class="col-md-8">{{ $course->sub_id }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">班級ID：</div>
+                <div class="col-md-8">{{ $course->cls_id }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">提前考：</div>
+                <div class="col-md-8">{{ $course->scr_exambf }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">期中考：</div>
+                <div class="col-md-8">{{ $course->scr_examid }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-md-right">期末考：</div>
+                <div class="col-md-8">{{ $course->scr_examfn }}</div>
+            </div>
         </div>
         <div class="card-block">
             <div class="text-xs-center">
@@ -117,10 +115,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" formaction="{{ route('course.addToTable', $course) }}">
+                    <button type="submit" class="btn btn-primary"
+                            formaction="{{ route('course.addToTable', $course) }}">
                         新增至課表
                     </button>
-                    <button type="submit" class="btn btn-danger" formaction="{{ route('course.removeFromTable', $course) }}">
+                    <button type="submit" class="btn btn-danger"
+                            formaction="{{ route('course.removeFromTable', $course) }}">
                         從課表移除
                     </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
