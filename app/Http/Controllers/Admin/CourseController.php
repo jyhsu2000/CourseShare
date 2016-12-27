@@ -159,6 +159,7 @@ class CourseController extends Controller
         $countSuccess = 0;
         $countSkip = 0;
         $errorFiles = [];
+        $errorCourses = [];
         foreach ($uploadedFiles as $uploadedFile) {
             /* @var UploadedFile $uploadedFile */
             $path = $uploadedFile->getPathname();
@@ -180,17 +181,22 @@ class CourseController extends Controller
                 }
                 $courseArray = (array) $course;
                 try {
-                    Course::create(array_merge([
-                        'id' => $courseId,
-                    ], $courseArray));
+                    Course::create(array_merge($courseArray, [
+                        'id'          => $courseId,
+                        'scr_remarks' => $request->get('scr_remarks') ?: '',
+                    ]));
                     $countSuccess++;
                 } catch (\Exception $exception) {
+                    $errorCourses[] = $courseId;
                 }
             }
         }
         $message = "匯入完成（成功：{$countSuccess}，略過：{$countSkip}，總計：{$count}）";
         if (count($errorFiles)) {
             $message .= '失敗檔案：' . implode('、', $errorFiles);
+        }
+        if (count($errorCourses)) {
+            $message .= '失敗課程：' . implode('、', $errorCourses);
         }
 
         return redirect()->route('admin.course.index')
