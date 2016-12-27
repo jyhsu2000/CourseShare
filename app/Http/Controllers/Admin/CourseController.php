@@ -80,7 +80,9 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('admin.course.show', compact('course'));
+        $courseTables = $course->courseTables()->where('public', true)->get();
+
+        return view('admin.course.show', compact(['course', 'courseTables']));
     }
 
     /**
