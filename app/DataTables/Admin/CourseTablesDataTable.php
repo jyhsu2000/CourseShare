@@ -19,6 +19,7 @@ class CourseTablesDataTable extends DataTable
             ->eloquent($this->query())
             ->addColumn('action', 'admin.courseTable.datatables.action')
             ->editColumn('user_id', 'admin.courseTable.datatables.user-name')
+            ->editColumn('name', 'admin.courseTable.datatables.name')
             ->filterColumn('user_id', function ($query, $keyword) {
                 /* @var Builder $query */
                 $query->whereIn('user_id', function ($query) use ($keyword) {
