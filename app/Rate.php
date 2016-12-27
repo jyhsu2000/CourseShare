@@ -36,6 +36,11 @@ class Rate extends Model
         'comment',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function rateable()
     {
         return $this->morphTo();

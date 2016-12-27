@@ -94,6 +94,11 @@ class User extends Authenticatable
         return $this->hasMany(Course::class);
     }
 
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
+
     /**
      * 帳號是否完成驗證
      *

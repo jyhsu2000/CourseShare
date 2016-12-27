@@ -1,6 +1,7 @@
 @inject('ratePresenter', 'App\Presenters\RatePresenter')
-@php($rate = $ratePresenter->getUserRate())
-@php($isEditMode = isset($rate) && $rate != null)
+@php($userRate = $ratePresenter->getUserRate())
+@php($rates = $ratePresenter->getRates())
+@php($isEditMode = isset($userRate) && $userRate != null)
 @php($methodText = $isEditMode ? '編輯' : '新增')
 <div class="card">
     <div class="card-header">
@@ -20,8 +21,8 @@
                         <h4 class="modal-title">{{ $methodText }}評價</h4>
                     </div>
                     @if($isEditMode)
-                        {{ Form::open(['route' => ['rate.update', $rate], 'method' => 'put']) }}
-                        {{ Form::model($rate) }}
+                        {{ Form::open(['route' => ['rate.update', $userRate], 'method' => 'put']) }}
+                        {{ Form::model($userRate) }}
                     @else
                         {{ Form::open(['route' => 'rate.store']) }}
                         {{ Form::hidden('rateable_type', $ratePresenter->getRateableType()) }}
@@ -30,7 +31,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             {{ Form::label('star','星等評價') }}
-                            {{ Form::number('star', null, ['class' => 'form-control', 'required', 'min' => 1, 'max' => 5]) }}
+                            {{ Form::select('star', $ratePresenter->getStarSelectOptions(), null, ['placeholder' => '','class' => 'form-control', 'required']) }}
                             @if ($errors->has('star'))
                                 <br/>
                                 <span class="form-control-feedback">
@@ -57,12 +58,30 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
     <div class="card-block">
-        {{ $ratePresenter->getRateableType() }}<br/>
-        {{ $ratePresenter->getRateableId() }}
+        評價次數：{{ $rates->count() }} / 平均評價：{{ $ratePresenter->getAverageRate() ?: '-'}}
     </div>
+    @foreach($rates as $rate)
+        <div class="card-block">
+            <p class="card-title" style="font-size: 1.5em">
+                <span class="text-success">{!! $ratePresenter->getStarIcon($rate->star) !!}</span>
+                <span class="float-sm-right text-sm-right" style="white-space: nowrap">
+                {{ Html::image(Gravatar::src($rate->user->email, 30), null, ['class'=>'img-thumbnail']) }}
+                    @if(Entrust::can('user.view') || Entrust::can('user.manage'))
+                        {{ link_to_route('user.show', $rate->user->name, $rate->user) }}
+                    @else
+                        {{ $rate->user->name }}
+                    @endif
+                    <br/>
+                    <small class="text-muted" style="font-size: 0.5em">
+                        Last updated {{ $rate->updated_at->diffForHumans() }}
+                    </small>
+                </span>
+            </p>
+            <blockquote class="blockquote">
+                {!! nl2br(htmlspecialchars($rate->comment)) !!}
+            </blockquote>
+        </div>
+    @endforeach
 </div>
