@@ -24,6 +24,11 @@
             var $filter = $('#dataTableBuilder_filter');
             $filter.html('搜尋選課代號：<input id="codeFilter" type="text" placeholder="" size="6" class="form-control input-sm" /> ' + $filter.html());
             var table = window.LaravelDataTables["dataTableBuilder"];
+            //FIXME: 原始搜尋會失效，暫時先手動加上
+            $('#dataTableBuilder_filter input[type=search]').on('keyup change', function () {
+                table.search(this.value)
+                    .draw();
+            });
             $('#codeFilter').on('keyup change', function () {
                 table.column(0)
                     .search(this.value)
