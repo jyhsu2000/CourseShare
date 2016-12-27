@@ -8,7 +8,7 @@
             background-color: #2a88bd !important;
         }
 
-        th, td {
+        th {
             white-space: nowrap;
         }
     </style>
@@ -19,11 +19,11 @@
     <a href="{{ route('courseTable.index') }}" class="btn btn-secondary">返回</a>
     @if($inAnalysisCourseTable)
         <a href="{{ route('analysis.remove', $courseTable) }}" class="btn btn-danger" title="將此課表從空堂分析移除">
-            <i class="fa fa-minus" aria-hidden="true"></i>
+            <i class="fa fa-minus" aria-hidden="true"></i> 分析
         </a>
     @else
         <a href="{{ route('analysis.add', $courseTable) }}" class="btn btn-primary" title="將此課表加入空堂分析">
-            <i class="fa fa-plus" aria-hidden="true"></i>
+            <i class="fa fa-plus" aria-hidden="true"></i> 分析
         </a>
     @endif
     @if($courseTable->user_id == auth()->user()->id)
@@ -146,9 +146,9 @@
                                         </div>
                                     </div>
                                 @endif
-                            @else
                             @endif
-                            <a href="{{ route('course.index',['weekday' => $weekday, 'periodNumber' => $number]) }}">
+                            <a href="{{ route('course.index',['weekday' => $weekday, 'periodNumber' => $number]) }}"
+                               title="查看該時段所有課程">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </a>
                         </td>
