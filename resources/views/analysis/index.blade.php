@@ -10,25 +10,32 @@
         </div>
         <div class="card-block">
             <div class="col-md-6">
-                @if(count($courseTables))
-                    <ul>
-                        @foreach($courseTables as $courseTable)
-                            <li>
-                                {{ link_to_route('courseTable.show', $courseTable->name, $courseTable, ['target' => '_blank']) }}
-                                {{ link_to_route('analysis.remove', '[-]', $courseTable, ['title' => '從分析清單移除', 'class' => 'text-danger']) }}
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    請先至課表頁面將課表加入分析清單
-                @endif
+                已選擇之課表：
+                <ul>
+                    @forelse($courseTables as $courseTable)
+                        <li>
+                            <a href="{{ route('courseTable.show', $courseTable) }}">
+                                {{ Html::image(Gravatar::src($courseTable->user->email, 30), null, ['class'=>'img-thumbnail']) }}
+                                {{ $courseTable->user->name }}
+                                - {{ $courseTable->name }}
+                            </a>
+                            {{ link_to_route('analysis.remove', '[-]', $courseTable, ['title' => '從分析清單移除', 'class' => 'text-danger']) }}
+                        </li>
+                    @empty
+                        <li>請先至課表頁面將課表加入分析清單</li>
+                    @endforelse
+                </ul>
             </div>
             <div class="col-md-6">
                 快速新增：
                 <ul>
                     @foreach($myCourseTables as $courseTable)
                         <li>
-                            {{ link_to_route('courseTable.show', $courseTable->name, $courseTable, ['target' => '_blank']) }}
+                            <a href="{{ route('courseTable.show', $courseTable) }}">
+                                {{ Html::image(Gravatar::src($courseTable->user->email, 30), null, ['class'=>'img-thumbnail']) }}
+                                {{ $courseTable->user->name }}
+                                - {{ $courseTable->name }}
+                            </a>
                             {{ link_to_route('analysis.add', '[+]', $courseTable, ['title' => '加入到分析清單', 'class' => 'text-success']) }}
                         </li>
                     @endforeach

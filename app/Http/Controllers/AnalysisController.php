@@ -28,10 +28,11 @@ class AnalysisController extends Controller
         /* @var User $user */
         $user = auth()->user();
         $courseTableIds = $this->analysisService->getAnalysisCourseTableIds();
+        $courseTablesQuery = CourseTable::with('user', 'courses.periods')->whereIn('id', $courseTableIds);
         if ($user->can('courseTable.manage')) {
-            $courseTables = CourseTable::whereIn('id', $courseTableIds)->get();
+            $courseTables = $courseTablesQuery->get();
         } else {
-            $courseTables = CourseTable::whereIn('id', $courseTableIds)
+            $courseTables = $courseTablesQuery
                 ->where('user_id', $user->id)
                 ->orWhere('public', true)
                 ->get();
