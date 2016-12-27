@@ -23,6 +23,7 @@ class CreateRatesTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->unique(['user_id', 'rateable_type', 'rateable_id']);
         });
     }
 
