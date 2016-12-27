@@ -160,6 +160,19 @@
             </table>
         </div>
     </div>
+    <div class="card">
+        <div class="card-header">
+            修課同學（限公開課表）
+        </div>
+        <div class="card-block">
+            @foreach($classMates as $classMate)
+                <div class="col-md-2">
+                    {{ Html::image(Gravatar::src($classMate->email, 30), null, ['class'=>'img-thumbnail']) }}
+                    {{ $classMate->name }}
+                </div>
+            @endforeach
+        </div>
+    </div>
     @include('rate.panel')
 @endsection
 
