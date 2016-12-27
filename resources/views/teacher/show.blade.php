@@ -21,3 +21,15 @@
     </div>
     @include('rate.panel')
 @endsection
+
+@section('js')
+    @if(session('errors'))
+        @if($errors->has('star') || $errors->has('comment'))
+            <script>
+                $(function () {
+                    $('#rateForm').modal({show: true});
+                });
+            </script>
+        @endif
+    @endif
+@endsection

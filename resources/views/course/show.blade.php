@@ -134,10 +134,18 @@
 
 @section('js')
     @if(session('errors'))
-        <script>
-            $(function () {
-                $('#Form').modal({show: true});
-            });
-        </script>
+        @if($errors->has('course_table_id'))
+            <script>
+                $(function () {
+                    $('#Form').modal({show: true});
+                });
+            </script>
+        @elseif($errors->has('star') || $errors->has('comment'))
+            <script>
+                $(function () {
+                    $('#rateForm').modal({show: true});
+                });
+            </script>
+        @endif
     @endif
 @endsection
