@@ -43,11 +43,6 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::get('analysis/remove/{courseTable}', 'AnalysisController@remove')->name('analysis.remove');
     //管理員
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
-        //節次
-        //權限：period.manage
-        Route::group(['middleware' => 'permission:period.manage'], function () {
-            Route::resource('period', 'PeriodController');
-        });
         //課表
         //權限：courseTable.manage
         Route::group(['middleware' => 'permission:courseTable.manage'], function () {
