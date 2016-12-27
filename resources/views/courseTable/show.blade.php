@@ -98,7 +98,7 @@
                                     衝堂<br/>
                                     <a href="javascript:void(0)" data-toggle="modal" data-target="#conflictForm">
                                         (顯示衝堂課程)
-                                    </a>
+                                    </a><br/>
                                     <div class="modal fade" id="conflictForm" tabindex="-1" role="dialog"
                                          aria-hidden="true">
                                         <div class="modal-dialog" role="document">
