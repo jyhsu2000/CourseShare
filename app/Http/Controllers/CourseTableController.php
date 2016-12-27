@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\AnalysisService;
 use App\User;
 use App\CourseTable;
 use Illuminate\Http\Request;
+use App\Services\AnalysisService;
 
 class CourseTableController extends Controller
 {
