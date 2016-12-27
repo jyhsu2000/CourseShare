@@ -113,7 +113,9 @@ class CourseTableController extends Controller
 
     public function data()
     {
-        $courseTables = CourseTable::orderBy('order')->orderBy('id')->get();
+        $user = auth()->user();
+        $courseTables = CourseTable::where('user_id', $user->id)
+            ->orderBy('order')->orderBy('id')->get();
 
         return response()->json($courseTables);
     }
