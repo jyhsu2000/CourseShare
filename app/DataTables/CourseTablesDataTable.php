@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables\Admin;
+namespace App\DataTables;
 
 use App\CourseTable;
 use Yajra\Datatables\Services\DataTable;
@@ -17,8 +17,8 @@ class CourseTablesDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'admin.courseTable.datatables.action')
-            ->editColumn('user_id', 'admin.courseTable.datatables.name')
+            ->addColumn('action', 'courseTable.datatables.action')
+            ->editColumn('user_id', 'courseTable.datatables.name')
             ->filterColumn('user_id', function ($query, $keyword) {
                 /* @var Builder $query */
                 $query->whereIn('user_id', function ($query) use ($keyword) {
@@ -41,7 +41,11 @@ class CourseTablesDataTable extends DataTable
     {
         $user = auth()->user();
         /* @var Builder $query */
-        $query = CourseTable::with('user');
+        $query = CourseTable::with('user')->where(function ($query) use ($user) {
+            /* @var Builder $query */
+            $query->where('user_id', $user->id)
+                ->orWhere('public', true);
+        });
 
         return $this->applyScopes($query);
     }

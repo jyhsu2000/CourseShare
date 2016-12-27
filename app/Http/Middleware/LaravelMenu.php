@@ -20,6 +20,10 @@ class LaravelMenu
         //左側
         Menu::make('left', function ($menu) {
             /* @var \Lavary\Menu\Builder $menu */
+            if (auth()->check()) {
+                $menu->add('我的課表', ['route' => 'courseTable.my']);
+                $menu->add('公開課表', ['route' => 'courseTable.index']);
+            }
             //$menu->add('Home', ['route' => 'index']);
             //$menu->add('About', 'javascript:void(0)');
             //$menu->add('Contact', 'javascript:void(0)');
@@ -33,9 +37,8 @@ class LaravelMenu
                     $menu->add('尚未完成信箱驗證', ['route' => 'confirm-mail.resend'])
                         ->link->attr(['class' => 'text-danger']);
                 }
-                $menu->add('課表', ['route' => 'courseTable.index']);
-                $menu->add('課程清單', ['route' => 'course.index']);
-                $menu->add('教師清單', ['route' => 'teacher.index']);
+                $menu->add('課程', ['route' => 'course.index']);
+                $menu->add('教師', ['route' => 'teacher.index']);
                 $menu->add('空堂分析', ['route' => 'analysis.index']);
                 //管理員
                 if (Entrust::can('menu.view') and auth()->user()->isConfirmed) {

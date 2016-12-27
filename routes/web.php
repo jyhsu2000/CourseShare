@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::post('courseTable/sort', 'CourseTableController@sort')->name('courseTable.sort');
     Route::post('courseTable/togglePublic/{courseTable}', 'CourseTableController@togglePublic')
         ->name('courseTable.togglePublic');
+    Route::get('courseTable/my', 'CourseTableController@my')->name('courseTable.my');
     Route::resource('courseTable', 'CourseTableController', [
         'except' => [
             'create',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CourseTablesDataTable;
 use App\User;
 use App\CourseTable;
 use Illuminate\Http\Request;
@@ -27,11 +28,17 @@ class CourseTableController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param CourseTablesDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function index()
+    public function index(CourseTablesDataTable $dataTable)
     {
-        return view('courseTable.index');
+        return $dataTable->render('courseTable.index');
+    }
+
+    public function my()
+    {
+        return view('courseTable.my');
     }
 
     /**
