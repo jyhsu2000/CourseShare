@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
 use App\Rate;
+use App\Course;
 use App\Teacher;
 use Illuminate\Http\Request;
 

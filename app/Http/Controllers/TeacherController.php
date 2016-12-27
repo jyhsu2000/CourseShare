@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\TeachersDataTable;
 use App\Teacher;
 use Illuminate\Http\Request;
+use App\DataTables\TeachersDataTable;
 
 class TeacherController extends Controller
 {
