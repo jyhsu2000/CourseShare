@@ -25,6 +25,7 @@ class AnalysisController extends Controller
 
     public function index()
     {
+        /* @var User $user */
         $user = auth()->user();
         $courseTableIds = $this->analysisService->getAnalysisCourseTableIds();
         if ($user->can('courseTable.manage')) {
@@ -35,6 +36,8 @@ class AnalysisController extends Controller
                 ->orWhere('public', true)
                 ->get();
         }
+
+        $myCourseTables = $user->courseTables()->whereNotIn('id', $courseTableIds)->get();
 
         $periodTable = [];
         foreach ($courseTables as $courseTable) {
@@ -50,7 +53,7 @@ class AnalysisController extends Controller
             }
         }
 
-        return view('analysis.index', compact(['courseTables', 'periodTable']));
+        return view('analysis.index', compact(['courseTables', 'myCourseTables', 'periodTable']));
     }
 
     public function add(Request $request, CourseTable $courseTable)

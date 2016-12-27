@@ -9,18 +9,31 @@
             分析課表
         </div>
         <div class="card-block">
-            @if(count($courseTables))
+            <div class="col-md-6">
+                @if(count($courseTables))
+                    <ul>
+                        @foreach($courseTables as $courseTable)
+                            <li>
+                                {{ link_to_route('courseTable.show', $courseTable->name, $courseTable, ['target' => '_blank']) }}
+                                {{ link_to_route('analysis.remove', '[-]', $courseTable, ['title' => '從分析清單移除', 'class' => 'text-danger']) }}
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    請先至課表頁面將課表加入分析清單
+                @endif
+            </div>
+            <div class="col-md-6">
+                快速新增：
                 <ul>
-                    @foreach($courseTables as $courseTable)
+                    @foreach($myCourseTables as $courseTable)
                         <li>
                             {{ link_to_route('courseTable.show', $courseTable->name, $courseTable, ['target' => '_blank']) }}
-                            {{ link_to_route('analysis.remove', '[-]', $courseTable, ['title' => '從分析清單移除', 'class' => 'text-danger']) }}
+                            {{ link_to_route('analysis.add', '[+]', $courseTable, ['title' => '加入到分析清單', 'class' => 'text-success']) }}
                         </li>
                     @endforeach
                 </ul>
-            @else
-                請先至課表頁面將課表加入分析清單
-            @endif
+            </div>
         </div>
     </div>
     @if(count($courseTables))
