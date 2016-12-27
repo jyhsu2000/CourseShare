@@ -19,4 +19,16 @@
 
 @section('js')
     {!! $dataTable->scripts() !!}
+    <script>
+        $(function () {
+            var $filter = $('#dataTableBuilder_filter');
+            $filter.html('搜尋選課代號：<input id="codeFilter" type="text" placeholder="" size="6" class="form-control input-sm" /> ' + $filter.html());
+            var table = window.LaravelDataTables["dataTableBuilder"];
+            $('#codeFilter').on('keyup change', function () {
+                table.column(0)
+                    .search(this.value)
+                    .draw();
+            });
+        });
+    </script>
 @endsection
