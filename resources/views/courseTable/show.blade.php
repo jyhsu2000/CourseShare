@@ -17,50 +17,52 @@
 @section('content')
     <h1>{{ $courseTable->name }} - 課表</h1>
     <a href="{{ route('courseTable.index') }}" class="btn btn-secondary">返回</a>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Form">
-        修改課表名稱
-    </button>
-    <div class="modal fade" id="Form" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="exampleModalLabel">修改課表名稱</h4>
-                </div>
-                {{ Form::open(['route' => ['courseTable.update', $courseTable], 'method' => 'put']) }}
-                <div class="modal-body">
-                    <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }}">
-                        <label for="name" class="form-control-label">課表名稱：</label>
-                        <input id="name" type="text" name="name" value="{{ $courseTable->name ?: old('name') }}"
-                               required
-                               class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}">
-                        @if ($errors->has('name'))
-                            <span class="form-control-feedback">
+    @if($courseTable->user_id == auth()->user()->id)
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Form">
+            修改課表名稱
+        </button>
+        <div class="modal fade" id="Form" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="exampleModalLabel">修改課表名稱</h4>
+                    </div>
+                    {{ Form::open(['route' => ['courseTable.update', $courseTable], 'method' => 'put']) }}
+                    <div class="modal-body">
+                        <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }}">
+                            <label for="name" class="form-control-label">課表名稱：</label>
+                            <input id="name" type="text" name="name" value="{{ $courseTable->name ?: old('name') }}"
+                                   required
+                                   class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}">
+                            @if ($errors->has('name'))
+                                <span class="form-control-feedback">
                                 <strong>{{ $errors->first('name') }}</strong>
                             </span>
-                        @endif
+                            @endif
+                        </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">修改</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    </div>
+                    {{ Form::close() }}
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">修改</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                </div>
-                {{ Form::close() }}
             </div>
         </div>
-    </div>
-    {!! Form::open(['route' => ['courseTable.togglePublic', $courseTable], 'style' => 'display: inline']) !!}
-    <button type="submit" class="btn btn-danger">
-        隱私設定：
-        @if($courseTable->public)
-            公開
-        @else
-            私人
-        @endif
-    </button>
-    {!! Form::close() !!}
+        {!! Form::open(['route' => ['courseTable.togglePublic', $courseTable], 'style' => 'display: inline']) !!}
+        <button type="submit" class="btn btn-danger">
+            隱私設定：
+            @if($courseTable->public)
+                公開
+            @else
+                私人
+            @endif
+        </button>
+        {!! Form::close() !!}
+    @endif
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead>
