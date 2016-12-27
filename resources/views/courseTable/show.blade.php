@@ -62,6 +62,22 @@
             @endif
         </button>
         {!! Form::close() !!}
+        @if($courseTable->public)
+            <form class="form-inline" style="display: inline;">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">共享網址：</div>
+                        <input type="text" class="form-control" id="url"
+                               value="{{ route('courseTable.show', $courseTable) }}" readonly/>
+                        <span class="input-group-btn">
+                        <span class="btn btn-secondary" data-clipboard-target="#url" id="copyBtn">
+                            <i class="fa fa-clipboard" aria-hidden="true"></i> Copy
+                        </span>
+                    </span>
+                    </div>
+                </div>
+            </form>
+        @endif
     @endif
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -182,6 +198,7 @@
             }).mouseleave(function () {
                 $(this).removeClass('bg');
             });
+            new Clipboard('#copyBtn');
         });
     </script>
 @endsection

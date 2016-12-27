@@ -19,6 +19,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.8.0/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.8.0/css/themes/bootstrap.min.css"/>
+    <script src="//cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
     {{-- DataTables --}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/buttons/1.2.3/css/buttons.dataTables.min.css">
