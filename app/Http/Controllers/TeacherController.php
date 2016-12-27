@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
+use App\DataTables\TeachersDataTable;
 use App\Teacher;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\DataTables\Admin\TeachersDataTable;
 
 class TeacherController extends Controller
 {
@@ -17,7 +16,17 @@ class TeacherController extends Controller
      */
     public function index(TeachersDataTable $dataTable)
     {
-        return $dataTable->render('admin.teacher.index');
+        return $dataTable->render('teacher.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //TODO
     }
 
     /**
@@ -28,13 +37,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-
-        $teacher = Teacher::create($request->all());
-
-        return redirect()->route('admin.teacher.index')->with('global', '教師已建立');
+        //TODO
     }
 
     /**
@@ -45,7 +48,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        return view('admin.teacher.show', compact('teacher'));
+        return view('teacher.show', $teacher);
     }
 
     /**
@@ -79,8 +82,6 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        $teacher->delete();
-
-        return redirect()->route('admin.teacher.index')->with('global', '教師除');
+        //TODO
     }
 }

@@ -129,6 +129,7 @@
             </div>
         </div>
     </div>
+    @include('rate.panel')
 @endsection
 
 @section('js')

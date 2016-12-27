@@ -32,6 +32,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::post('course/addToTable/{course}', 'CourseController@addToTable')->name('course.addToTable');
     Route::post('course/removeFromTable/{course}', 'CourseController@removeFromTable')->name('course.removeFromTable');
     Route::resource('course', 'CourseController');
+    //教師
+    Route::resource('teacher', 'TeacherController');
+    //評價
+    Route::resource('rate', 'RateController');
     //管理員
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
         //節次
