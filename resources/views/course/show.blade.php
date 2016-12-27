@@ -87,6 +87,12 @@
         </div>
         <div class="card-block">
             <div class="text-xs-center">
+                @if(session('lastCourseTableId_' . auth()->user()->id))
+                    <a href="{{ route('courseTable.show', session('lastCourseTableId_' . auth()->user()->id)) }}"
+                       class="btn btn-secondary">
+                        回到課表
+                    </a>
+                @endif
                 <a href="{{ route('course.index') }}" class="btn btn-secondary">返回課程清單</a>
                 @if($course->user_id == auth()->user()->id)
                     <a href="{{ route('course.edit', $course) }}" class="btn btn-primary">編輯課程</a>

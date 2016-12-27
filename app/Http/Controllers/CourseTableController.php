@@ -59,6 +59,10 @@ class CourseTableController extends Controller
         if ($courseTable->user_id != $user->id && !$courseTable->public && !$user->can('courseTable.manage')) {
             abort(403);
         }
+        //記錄最後訪問課表ID
+        if ($courseTable->user_id == $user->id) {
+            session(['lastCourseTableId_' . $user->id => $courseTable->id]);
+        }
         $periodTable = [];
         foreach ($courseTable->courses as $course) {
             foreach ($course->periods as $period) {
