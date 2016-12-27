@@ -162,13 +162,16 @@
     </div>
     <div class="card">
         <div class="card-header">
-            修課同學（限公開課表）
+            有這門課的課表（限公開課表）
         </div>
         <div class="card-block">
-            @foreach($classMates as $classMate)
+            @foreach($courseTables as $courseTable)
                 <div class="col-md-2">
-                    {{ Html::image(Gravatar::src($classMate->email, 30), null, ['class'=>'img-thumbnail']) }}
-                    {{ $classMate->name }}
+                    <a href="{{ route('courseTable.show', $courseTable) }}">
+                        {{ Html::image(Gravatar::src($courseTable->user->email, 30), null, ['class'=>'img-thumbnail']) }}
+                        {{ $courseTable->user->name }}
+                        - {{ $courseTable->name }}
+                    </a>
                 </div>
             @endforeach
         </div>

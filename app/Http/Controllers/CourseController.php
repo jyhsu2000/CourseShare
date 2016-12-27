@@ -92,14 +92,8 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $courseTables = $course->courseTables()->where('public', true)->get();
-        $classMateIds = [];
-        foreach ($courseTables as $courseTable) {
-            $classMateIds[] = $courseTable->user_id;
-        }
-        $classMateIds = array_unique($classMateIds);
-        $classMates = User::whereIn('id', $classMateIds)->get();
 
-        return view('course.show', compact(['course', 'classMates']));
+        return view('course.show', compact(['course', 'courseTables']));
     }
 
     /**
