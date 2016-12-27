@@ -175,6 +175,7 @@ class CourseController extends Controller
                 continue;
             }
             foreach ($json as $courseId => $course) {
+                $count++;
                 if (Course::find($courseId)) {
                     $countSkip++;
                     continue;
