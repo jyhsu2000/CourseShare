@@ -139,6 +139,27 @@
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-header">
+            教師
+        </div>
+        <div class="card-block">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>名稱</th>
+                    <th>評價</th>
+                </tr>
+                </thead>
+                @foreach($course->teachers as $teacher)
+                    <tr>
+                        <td>{{ link_to_route('teacher.show', $teacher->name, $teacher) }}</td>
+                        <td>{{ $teacher->star }}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
     @include('rate.panel')
 @endsection
 
