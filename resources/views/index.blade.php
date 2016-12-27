@@ -18,6 +18,6 @@
     <div class="jumbotron">
         <h1 class="display-1">{{ config('app.name') }}</h1>
         <h2 class="display-3">課程分享平台</h2>
-        <a href="javascript:void(0)" class="btn btn-primary btn-lg" style="margin-top: 5vh;" title="Let's GO!!">GO!</a>
+        <a href="{{ route('courseTable.my') }}" class="btn btn-primary btn-lg" style="margin-top: 5vh;" title="Let's GO!!">GO!</a>
     </div>
 @endsection
