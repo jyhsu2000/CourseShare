@@ -198,7 +198,12 @@
             }).mouseleave(function () {
                 $(this).removeClass('bg');
             });
-            new Clipboard('#copyBtn');
+
+            var clipboard = new Clipboard('#copyBtn');
+            clipboard.on('success', function (e) {
+                alertify.notify('共享網址已複製', 'success', 5);
+                e.clearSelection();
+            });
         });
     </script>
 @endsection
