@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AnalysisService;
 use App\User;
 use App\CourseTable;
 use Illuminate\Http\Request;
@@ -9,11 +10,18 @@ use Illuminate\Http\Request;
 class CourseTableController extends Controller
 {
     /**
-     * CourseTableController constructor.
+     * @var AnalysisService
      */
-    public function __construct()
+    private $analysisService;
+
+    /**
+     * CourseTableController constructor.
+     * @param AnalysisService $analysisService
+     */
+    public function __construct(AnalysisService $analysisService)
     {
         $this->middleware('owner:courseTable', ['only' => ['edit', 'update', 'destroy', 'togglePublic']]);
+        $this->analysisService = $analysisService;
     }
 
     /**
@@ -63,6 +71,10 @@ class CourseTableController extends Controller
         if ($courseTable->user_id == $user->id) {
             session(['lastCourseTableId_' . $user->id => $courseTable->id]);
         }
+        //分析用課表清單
+        $analysisCourseTableIds = $this->analysisService->getAnalysisCourseTableIds();
+        $inAnalysisCourseTable = in_array($courseTable->id, $analysisCourseTableIds);
+
         $periodTable = [];
         foreach ($courseTable->courses as $course) {
             foreach ($course->periods as $period) {
@@ -80,7 +92,7 @@ class CourseTableController extends Controller
             }
         }
 
-        return view('courseTable.show', compact(['courseTable', 'periodTable']));
+        return view('courseTable.show', compact(['courseTable', 'periodTable', 'inAnalysisCourseTable']));
     }
 
     /**

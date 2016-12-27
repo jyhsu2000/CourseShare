@@ -17,6 +17,15 @@
 @section('content')
     <h1>{{ $courseTable->name }} - 課表</h1>
     <a href="{{ route('courseTable.index') }}" class="btn btn-secondary">返回</a>
+    @if($inAnalysisCourseTable)
+        <a href="{{ route('analysis.remove', $courseTable) }}" class="btn btn-danger" title="將此課表從空堂分析移除">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+        </a>
+    @else
+        <a href="{{ route('analysis.add', $courseTable) }}" class="btn btn-primary" title="將此課表加入空堂分析">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    @endif
     @if($courseTable->user_id == auth()->user()->id)
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Form">
             修改課表名稱

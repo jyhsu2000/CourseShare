@@ -36,6 +36,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::resource('teacher', 'TeacherController');
     //評價
     Route::resource('rate', 'RateController');
+    //空堂分析
+    Route::get('analysis', 'AnalysisController@index')->name('analysis.index');
+    Route::get('analysis/add/{courseTable}', 'AnalysisController@add')->name('analysis.add');
+    Route::get('analysis/remove/{courseTable}', 'AnalysisController@remove')->name('analysis.remove');
     //管理員
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
         //節次
