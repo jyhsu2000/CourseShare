@@ -31,14 +31,16 @@
                     <td class="text-md-right">Email：</td>
                     <td>{{ $user->email }}</td>
                 </tr>
-                <tr>
-                    <td class="text-md-right">角色：</td>
-                    <td>
-                        @foreach($user->roles as $role)
-                            {{ $role->display_name }}<br/>
-                        @endforeach
-                    </td>
-                </tr>
+                @if(count($user->roles))
+                    <tr>
+                        <td class="text-md-right">角色：</td>
+                        <td>
+                            @foreach($user->roles as $role)
+                                {{ $role->display_name }}<br/>
+                            @endforeach
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <td class="text-md-right">註冊時間：</td>
                     <td>{{ $user->register_at }}</td>
