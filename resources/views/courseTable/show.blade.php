@@ -160,7 +160,9 @@
                     <th>選課代號</th>
                     <th>科目名稱</th>
                     <th>上課時間/上課教室/授課教師</th>
-                    <th>操作</th>
+                    @if($courseTable->user_id == auth()->user()->id)
+                        <th>操作</th>
+                    @endif
                 </tr>
                 </thead>
                 @foreach($courseTable->courses as $course)
@@ -170,12 +172,14 @@
                             {{ link_to_route('course.show', $course->sub_name, $course, ['target' => '_blank']) }}
                         </td>
                         <td>{{ $course->scr_period }}</td>
-                        <td>
-                            {{ Form::open(['route' => ['course.removeFromTable', $course], 'onsubmit' => 'return confirm("確定要從課表移除嗎？")']) }}
-                            {{ Form::hidden('course_table_id', $courseTable->id) }}
-                            <button type="submit" class="btn btn-danger">從課表移除</button>
-                            {{ Form::close() }}
-                        </td>
+                        @if($courseTable->user_id == auth()->user()->id)
+                            <td>
+                                {{ Form::open(['route' => ['course.removeFromTable', $course], 'onsubmit' => 'return confirm("確定要從課表移除嗎？")']) }}
+                                {{ Form::hidden('course_table_id', $courseTable->id) }}
+                                <button type="submit" class="btn btn-danger">從課表移除</button>
+                                {{ Form::close() }}
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
             </table>
