@@ -29,6 +29,5 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="clipboard" level="application" />
   </component>
 </module>
