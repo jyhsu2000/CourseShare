@@ -9,6 +9,10 @@
         </div>
         <div class="card-block">
             <div class="row">
+                <div class="col-md-4 text-md-right">評價：</div>
+                <div class="col-md-8">{{ $course->star }}</div>
+            </div>
+            <div class="row">
                 <div class="col-md-4 text-md-right">名稱：</div>
                 <div class="col-md-8">{{ $course->sub_name }}</div>
             </div>

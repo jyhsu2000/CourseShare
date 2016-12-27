@@ -34,4 +34,9 @@ class Teacher extends Model
     {
         return $this->morphMany(Rate::class, 'rateable');
     }
+
+    public function getStarAttribute()
+    {
+        return ($this->rates()->avg('star') ?: 0) . ' / 5.0';
+    }
 }

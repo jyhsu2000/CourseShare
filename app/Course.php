@@ -119,6 +119,11 @@ class Course extends Model
         return $teacherName;
     }
 
+    public function getStarAttribute()
+    {
+        return ($this->rates()->avg('star') ?: 0) . ' / 5.0';
+    }
+
     public static function getYearRange()
     {
         $startYear = 90;
