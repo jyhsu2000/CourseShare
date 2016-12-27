@@ -16,6 +16,11 @@
 
 @section('content')
     <h1>{{ $courseTable->name }} - 課表</h1>
+    <div>
+        擁有者：
+        {{ Html::image(Gravatar::src($courseTable->user->email, 30), null, ['class'=>'img-thumbnail']) }}
+        {{ $courseTable->user->name }}
+    </div>
     <a href="{{ route('courseTable.index') }}" class="btn btn-secondary">返回</a>
     @if($inAnalysisCourseTable)
         <a href="{{ route('analysis.remove', $courseTable) }}" class="btn btn-danger" title="將此課表從空堂分析移除">
