@@ -32,8 +32,8 @@
         </a>
     @endif
     @if($courseTable->user_id == auth()->user()->id)
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Form">
-            修改課表名稱
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Form" title="修改課表名稱">
+            <i class="fa fa-pencil" aria-hidden="true"></i> 修改
         </button>
         <div class="modal fade" id="Form" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -68,11 +68,10 @@
         </div>
         {!! Form::open(['route' => ['courseTable.togglePublic', $courseTable], 'style' => 'display: inline']) !!}
         <button type="submit" class="btn btn-danger">
-            隱私設定：
             @if($courseTable->public)
-                公開
+                <i class="fa fa-globe" aria-hidden="true"></i> 公開
             @else
-                私人
+                <i class="fa fa-lock" aria-hidden="true"></i> 私人
             @endif
         </button>
         {!! Form::close() !!}
@@ -80,12 +79,12 @@
             <form class="form-inline" style="display: inline;">
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon">共享網址：</div>
+                        <div class="input-group-addon">網址：</div>
                         <input type="text" class="form-control" id="url"
                                value="{{ route('courseTable.show', $courseTable) }}" readonly/>
                         <span class="input-group-btn">
-                        <span class="btn btn-secondary" data-clipboard-target="#url" id="copyBtn">
-                            <i class="fa fa-clipboard" aria-hidden="true"></i> Copy
+                        <span class="btn btn-secondary" data-clipboard-target="#url" id="copyBtn" title="複製共享網址">
+                            <i class="fa fa-clipboard" aria-hidden="true"></i> 複製
                         </span>
                     </span>
                     </div>
