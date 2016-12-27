@@ -28,4 +28,9 @@ class Teacher extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+
+    public function rates()
+    {
+        return $this->morphMany(Rate::class, 'rateable');
+    }
 }

@@ -104,6 +104,11 @@ class Course extends Model
         return $this->belongsToMany(Period::class)->withPivot('location');
     }
 
+    public function rates()
+    {
+        return $this->morphMany(Rate::class, 'rateable');
+    }
+
     public function getTeacherNamesAttribute()
     {
         $teacherNameArray = $this->teachers->pluck('name')->toArray();
