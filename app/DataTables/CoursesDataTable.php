@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Course;
+use App\Period;
 use Yajra\Datatables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -44,6 +45,26 @@ class CoursesDataTable extends DataTable
         $semester = \Request::get('semester');
         if ($semester) {
             $query->where('semester', $semester);
+        }
+        //星期幾
+        $weekday = \Request::get('weekday');
+        //第幾節
+        $periodNumber = \Request::get('periodNumber');
+        if ($weekday || $weekday === '0' || $periodNumber) {
+            $periodQuery = Period::query();
+            if ($weekday || $weekday === '0') {
+                $periodQuery->where('weekday', $weekday);
+            }
+            if ($periodNumber) {
+                $periodQuery->where('number', $periodNumber);
+            }
+            $periods = $periodQuery->get();
+            $courseIds = [];
+            foreach ($periods as $period) {
+                $checkCourseIds = $period->courses->pluck('id')->toArray();
+                $courseIds = array_unique(array_merge($courseIds, $checkCourseIds));
+            }
+            $query->whereIn('id', $courseIds);
         }
 
         return $this->applyScopes($query);

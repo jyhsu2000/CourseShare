@@ -85,18 +85,16 @@
                         {{ \App\Period::getTimeRangeString($number) }}
                     </td>
                     @foreach(range(0,6) as $weekday)
-                        @if(isset($periodTable[$weekday][$number]))
-                            @if(count($periodTable[$weekday][$number])==1)
-                                <td class="text-xs-center hover bg-info">
+                        <td class="text-xs-center  @if(isset($periodTable[$weekday][$number])) hover @if(count($periodTable[$weekday][$number])==1) bg-info @else bg-danger @endif @endif">
+                            @if(isset($periodTable[$weekday][$number]))
+                                @if(count($periodTable[$weekday][$number])==1)
                                     @foreach($periodTable[$weekday][$number] as $periodCourse)
                                         {{ link_to_route('course.show', $periodCourse->name, $periodCourse->id, ['target' => '_blank']) }}
                                         <br/>
                                         {{ $periodCourse->teacher }}<br/>
                                         {{ $periodCourse->location }}<br/>
                                     @endforeach
-                                </td>
-                            @else
-                                <td class="text-xs-center hover bg-danger">
+                                @else
                                     衝堂<br/>
                                     <a href="javascript:void(0)" data-toggle="modal" data-target="#conflictForm">
                                         (顯示衝堂課程)
@@ -122,11 +120,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                </td>
+                                @endif
+                            @else
                             @endif
-                        @else
-                            <td class="text-xs-center"></td>
-                        @endif
+                            <a href="{{ route('course.index',['weekday' => $weekday, 'periodNumber' => $number]) }}">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+                        </td>
                     @endforeach
                 </tr>
             @endforeach
