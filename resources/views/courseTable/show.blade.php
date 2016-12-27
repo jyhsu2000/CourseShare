@@ -5,7 +5,7 @@
 @section('css')
     <style>
         .bg {
-            background-color: #2a88bd !important;
+            background-color: #99ffff !important;
         }
 
         th {
