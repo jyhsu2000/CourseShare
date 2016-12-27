@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\CourseTable[] $courseTables
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Teacher[] $teachers
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Period[] $periods
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Rate[] $rates
+ * @property-read string $teacher_names
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Course whereYear($value)

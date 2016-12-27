@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Course[] $courses
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Rate[] $rates
  * @method static \Illuminate\Database\Query\Builder|\App\Teacher whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Teacher whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Teacher whereCreatedAt($value)
