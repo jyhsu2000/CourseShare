@@ -3,5 +3,9 @@
 {{ Form::select('year', \App\Course::getYearRange(), Request::get('year'), ['placeholder' => '- 學年度 -', 'class' => 'form-control']) }}
 {{ Form::label('semester','學期：') }}
 {{ Form::select('semester', [1=>'上學期',2=>'下學期'], Request::get('semester'), ['placeholder' => '- 學期 -', 'class' => 'form-control']) }}
+{{ Form::label('weekday','星期：') }}
+{{ Form::select('weekday', \App\Period::getWeekdaySelectOptions(), Request::get('weekday'), ['placeholder' => '- 星期幾 -', 'class' => 'form-control']) }}
+{{ Form::label('periodNumber','節次：') }}
+{{ Form::select('periodNumber', \App\Period::getPeriodNumberSelectOptions(), Request::get('periodNumber'), ['placeholder' => '- 節次 -', 'class' => 'form-control']) }}
 {{ Form::submit('提交', ['class' => 'btn btn-primary']) }}
 {{ Form::close() }}

@@ -69,4 +69,21 @@ class Period extends Model
 
         return $startAt->format('H:i') . ' ~ ' . $endAt->format('H:i');
     }
+
+    public static function getWeekdaySelectOptions()
+    {
+        $options = [0 => '日', '一', '二', '三', '四', '五', '六'];
+
+        return $options;
+    }
+
+    public static function getPeriodNumberSelectOptions()
+    {
+        $options = [];
+        for ($i = 1; $i <= 14; $i++) {
+            $options[$i] = '第 ' . $i . ' 節（' . static::getTimeRangeString($i) . '）';
+        }
+
+        return $options;
+    }
 }
