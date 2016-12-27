@@ -166,7 +166,7 @@
         </div>
         <div class="card-block">
             @foreach($courseTables as $courseTable)
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <a href="{{ route('courseTable.show', $courseTable) }}">
                         {{ Html::image(Gravatar::src($courseTable->user->email, 30), null, ['class'=>'img-thumbnail']) }}
                         {{ $courseTable->user->name }}
