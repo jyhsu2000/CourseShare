@@ -21,61 +21,6 @@ class CourseTableController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //TODO
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //TODO
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param CourseTable $courseTable
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CourseTable $courseTable)
-    {
-        //TODO
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param CourseTable $courseTable
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CourseTable $courseTable)
-    {
-        //TODO
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param CourseTable $courseTable
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CourseTable $courseTable)
-    {
-        //TODO
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param CourseTable $courseTable

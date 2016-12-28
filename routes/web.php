@@ -34,9 +34,19 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::post('course/removeFromTable/{course}', 'CourseController@removeFromTable')->name('course.removeFromTable');
     Route::resource('course', 'CourseController');
     //教師
-    Route::resource('teacher', 'TeacherController');
+    Route::resource('teacher', 'TeacherController', [
+        'only' => [
+            'index',
+            'show',
+        ],
+    ]);
     //評價
-    Route::resource('rate', 'RateController');
+    Route::resource('rate', 'RateController', [
+        'only' => [
+            'store',
+            'update',
+        ],
+    ]);
     //空堂分析
     Route::get('analysis', 'AnalysisController@index')->name('analysis.index');
     Route::get('analysis/add/{courseTable}', 'AnalysisController@add')->name('analysis.add');
@@ -46,7 +56,12 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         //課表
         //權限：courseTable.manage
         Route::group(['middleware' => 'permission:courseTable.manage'], function () {
-            Route::resource('courseTable', 'CourseTableController');
+            Route::resource('courseTable', 'CourseTableController', [
+                'only' => [
+                    'index',
+                    'destroy',
+                ],
+            ]);
         });
         //課程
         //權限：course.manage
@@ -60,6 +75,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             Route::resource('teacher', 'TeacherController', [
                 'except' => [
                     'create',
+                    'edit',
+                    'update',
                 ],
             ]);
         });

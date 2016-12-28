@@ -49,29 +49,6 @@ class TeacherController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Teacher $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Teacher $teacher)
-    {
-        //TODO
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param Teacher $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Teacher $teacher)
-    {
-        //TODO
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param Teacher $teacher

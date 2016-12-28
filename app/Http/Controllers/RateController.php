@@ -18,26 +18,6 @@ class RateController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //TODO
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //TODO
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -69,28 +49,6 @@ class RateController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Rate $rate
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Rate $rate)
-    {
-        //TODO
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Rate $rate
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rate $rate)
-    {
-        //TODO
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -109,16 +67,5 @@ class RateController extends Controller
         ]);
 
         return redirect()->back()->with('global', '已更新評價');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Rate $rate
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Rate $rate)
-    {
-        //TODO
     }
 }
