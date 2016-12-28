@@ -13,7 +13,7 @@
         link.setAttribute("id", id);
         link.onerror = function() {
             loadStyle(id, filename);
-        }
+        };
         var head = document.getElementsByTagName('head');
 
         if (head.length > 0) {
@@ -21,7 +21,7 @@
         } else {
             document.body.appendChild(link);
         }
-    }
+    };
 
     var loadScript = function(id, filename, callback) {
         id = "laravel-terminal-"+id;
@@ -37,7 +37,7 @@
         js.setAttribute("id", id);
         js.onerror = function() {
             loadScript(id, filename, callback);
-        }
+        };
         if (callback) {
             js.onload = callback;
         }
@@ -47,7 +47,7 @@
         } else {
             document.body.appendChild(js);
         }
-    }
+    };
 
     loadStyle('css', "{{ action('\Recca0120\Terminal\Http\Controllers\TerminalController@media', ['file' => 'css/bundle.css']) }}");
     var scripts = {

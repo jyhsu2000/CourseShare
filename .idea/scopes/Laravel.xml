@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Laravel" pattern="!file[CourseShare]:.idea/*&amp;&amp;!file[CourseShare]:vendor/*&amp;&amp;!file[CourseShare]:vendor//*&amp;&amp;!file[CourseShare]:public/vendor/*&amp;&amp;!file[CourseShare]:public/vendor//*&amp;&amp;!file:public/css/app.css&amp;&amp;!file:public/css/app.css.map&amp;&amp;!file:public/js/app.js" />
+</component>

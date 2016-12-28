@@ -38,8 +38,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -187,8 +185,6 @@ class RegisterController extends Controller
     {
         //產生驗證碼
         $confirmCode = str_random(60);
-        //產生驗證連結
-        $link = route('confirm', $confirmCode);
         //記錄驗證碼
         $user->update([
             'confirm_code' => $confirmCode,

@@ -80,6 +80,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">網址：</div>
+                        <label for="url" class="sr-only">網址</label>
                         <input type="text" class="form-control" id="url"
                                value="{{ route('courseTable.show', $courseTable) }}" readonly/>
                         <span class="input-group-btn">

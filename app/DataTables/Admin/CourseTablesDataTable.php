@@ -40,7 +40,6 @@ class CourseTablesDataTable extends DataTable
      */
     public function query()
     {
-        $user = auth()->user();
         /* @var Builder $query */
         $query = CourseTable::with('user');
 
