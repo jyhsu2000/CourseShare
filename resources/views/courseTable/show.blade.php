@@ -92,6 +92,11 @@
                 </div>
             </form>
         @endif
+        {!! Form::open(['route' => ['courseTable.destroy', $courseTable], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除此課表嗎？');"]) !!}
+        <button type="submit" class="btn btn-danger" title="刪除課表">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+        {!! Form::close() !!}
     @endif
     <div class="table-responsive">
         <table class="table table-bordered table-hover">

@@ -59,7 +59,7 @@ class CourseTableController extends Controller
             'order' => CourseTable::where('user_id', $user->id)->max('order') + 1 ?: 0,
         ]));
 
-        return redirect()->route('courseTable.index')->with('global', '已建立課表');
+        return redirect()->route('courseTable.my')->with('global', '已建立課表');
     }
 
     /**
@@ -131,7 +131,7 @@ class CourseTableController extends Controller
     {
         $courseTable->delete();
 
-        return redirect()->route('courseTable.index')->with('global', '已刪除課表');
+        return redirect()->route('courseTable.my')->with('global', '已刪除課表');
     }
 
     public function data()
