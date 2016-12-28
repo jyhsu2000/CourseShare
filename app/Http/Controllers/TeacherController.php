@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Teacher;
-use Illuminate\Http\Request;
 use App\DataTables\TeachersDataTable;
 
 class TeacherController extends Controller
