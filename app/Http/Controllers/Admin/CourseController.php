@@ -158,8 +158,8 @@ class CourseController extends Controller
         $uploadedFiles = $request->file('files');
 
         $count = 0;
-        $countSuccess = 0;
-        $countSkip = 0;
+        $countCreated = 0;
+        $countUpdated = 0;
         $errorFiles = [];
         $errorCourses = [];
         foreach ($uploadedFiles as $uploadedFile) {
@@ -178,23 +178,30 @@ class CourseController extends Controller
             }
             foreach ($json as $courseId => $course) {
                 $count++;
-                if (Course::find($courseId)) {
-                    $countSkip++;
-                    continue;
-                }
+                //檢查課程是否已存在
+                $existCourse = Course::find($courseId);
                 $courseArray = (array) $course;
                 try {
+                    if ($existCourse) {
+                        //已存在，更新課程
+                        $existCourse->update(array_merge($courseArray, [
+                            'scr_remarks' => $request->get('scr_remarks') ?: '',
+                        ]));
+                        $countUpdated++;
+                        continue;
+                    }
+                    //不存在，新增課程
                     Course::create(array_merge($courseArray, [
                         'id'          => $courseId,
                         'scr_remarks' => $request->get('scr_remarks') ?: '',
                     ]));
-                    $countSuccess++;
+                    $countCreated++;
                 } catch (\Exception $exception) {
                     $errorCourses[] = $courseId;
                 }
             }
         }
-        $message = "匯入完成（成功：{$countSuccess}，略過：{$countSkip}，總計：{$count}）";
+        $message = "匯入完成（新增：{$countCreated}，更新：{$countUpdated}，總計：{$count}）";
         if (count($errorFiles)) {
             $message .= '失敗檔案：' . implode('、', $errorFiles);
         }
