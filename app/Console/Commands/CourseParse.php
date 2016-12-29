@@ -39,7 +39,7 @@ class CourseParse extends Command
     public function handle()
     {
         /** @var Course[] $courses */
-        $courses = Course::all();
+        $courses = Course::orderBy('updated_at')->get();
 
         //進度條
         $bar = $this->output->createProgressBar(count($courses));
