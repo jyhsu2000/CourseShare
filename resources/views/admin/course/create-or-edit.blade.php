@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
                 {{ Form::label('scr_period', '上課時間/上課教室/授課教師', ['class' => 'form-control-label']) }}
-                {{ Form::text('scr_period', null, ['class' => 'form-control']) }}
+                {{ Form::text('scr_period', null, ['class' => 'form-control', 'placeholder' => '格式如：(一)01-03 資電311 (二)07 資電222 某某老師']) }}
             </div>
                 <div class="form-group">
                     {{ Form::label('scj_scr_mso', '必選修', ['class' => 'form-control-label']) }}
