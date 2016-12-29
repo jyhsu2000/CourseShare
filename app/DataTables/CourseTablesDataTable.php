@@ -41,11 +41,7 @@ class CourseTablesDataTable extends DataTable
     {
         $user = auth()->user();
         /* @var Builder $query */
-        $query = CourseTable::with('user')->where(function ($query) use ($user) {
-            /* @var Builder $query */
-            $query->where('user_id', $user->id)
-                ->orWhere('public', true);
-        });
+        $query = CourseTable::with('user')->where('public', true);
 
         return $this->applyScopes($query);
     }
