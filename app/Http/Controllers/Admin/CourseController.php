@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\CoursesDataTable;
+use Webpatser\Uuid\Uuid;
 
 class CourseController extends Controller
 {
@@ -43,7 +44,7 @@ class CourseController extends Controller
         $this->validate($request, [
             'year'        => 'required|integer',   //TODO: 檢查是否落在Course的yearRange
             'semester'    => 'required|in:1,2',
-            'id'          => ['required', 'max:255', Rule::unique(app(Course::class)->getTable())],
+            'id'          => ['max:255', Rule::unique(app(Course::class)->getTable())],
             'sub_name'    => 'required|max:255',
             'scr_period'  => 'max:255',
             'scj_scr_mso' => 'max:255',
@@ -61,7 +62,9 @@ class CourseController extends Controller
             'scr_examid'  => 'max:255',
             'scr_examfn'  => 'max:255',
         ]);
+        $id = $request->get('id') ?: Uuid::generate()->string;
         $properties = array_merge($request->all(), [
+            'id'          => $id,
             'scr_acptcnt' => (int) $request->get('scr_acptcnt'),
             'scr_precnt'  => (int) $request->get('scr_precnt'),
             'scr_credit'  => (int) $request->get('scr_credit'),

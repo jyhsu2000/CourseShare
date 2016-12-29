@@ -41,7 +41,11 @@
             </div>
             <div class="form-group">
                 {{ Form::label('id', '課程編號', ['class' => 'form-control-label']) }}
-                {{ Form::text('id', null, ['class' => 'form-control', 'required']) }}
+                @if($isEditMode)
+                    {{ Form::text('id', null, ['class' => 'form-control', 'required']) }}
+                @else
+                    {{ Form::text('id', null, ['class' => 'form-control']) }}
+                @endif
             </div>
             <div class="form-group">
                 {{ Form::label('sub_name', '科目名稱', ['class' => 'form-control-label']) }}
@@ -51,10 +55,10 @@
                 {{ Form::label('scr_period', '上課時間/上課教室/授課教師', ['class' => 'form-control-label']) }}
                 {{ Form::text('scr_period', null, ['class' => 'form-control', 'placeholder' => '格式如：(一)01-03 資電311 (二)07 資電222 某某老師']) }}
             </div>
-                <div class="form-group">
-                    {{ Form::label('scj_scr_mso', '必選修', ['class' => 'form-control-label']) }}
-                    {{ Form::text('scj_scr_mso', null, ['class' => 'form-control']) }}
-                </div>
+            <div class="form-group">
+                {{ Form::label('scj_scr_mso', '必選修', ['class' => 'form-control-label']) }}
+                {{ Form::text('scj_scr_mso', null, ['class' => 'form-control']) }}
+            </div>
             <div class="form-group">
                 {{ Form::label('scr_acptcnt', '實收名額', ['class' => 'form-control-label']) }}
                 {{ Form::number('scr_acptcnt', null, ['class' => 'form-control', 'min' => 0]) }}
