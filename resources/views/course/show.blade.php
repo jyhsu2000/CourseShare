@@ -96,6 +96,9 @@
                 <a href="{{ route('course.index') }}" class="btn btn-secondary">返回課程清單</a>
                 @if($course->user_id == auth()->user()->id)
                     <a href="{{ route('course.edit', $course) }}" class="btn btn-primary">編輯課程</a>
+                    {!! Form::open(['route' => ['course.destroy', $course], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除此課程嗎？');"]) !!}
+                    <button type="submit" class="btn btn-danger">刪除課程</button>
+                    {!! Form::close() !!}
                 @endif
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Form">
                     新增至課表/從課表移除
