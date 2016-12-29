@@ -9,7 +9,7 @@
         {{ Form::select('weekday', \App\Period::getWeekdaySelectOptions(), Request::get('weekday'), ['placeholder' => '- 星期幾 -', 'class' => 'form-control']) }}
         {{ Form::label('periodNumber','節次：') }}
         {{ Form::select('periodNumber', \App\Period::getPeriodNumberSelectOptions(), Request::get('periodNumber'), ['placeholder' => '- 節次 -', 'class' => 'form-control']) }}
-        {{ Form::submit('提交', ['class' => 'btn btn-primary']) }}
+        {{ Form::submit('過濾', ['class' => 'btn btn-primary']) }}
         {{ Form::close() }}
         <a href="{{ URL::current() }}" class="btn btn-secondary">清除</a>
     </div>
