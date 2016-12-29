@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Course;
 use App\CourseTable;
+use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\DataTables\CoursesDataTable;
-use Webpatser\Uuid\Uuid;
 
 class CourseController extends Controller
 {

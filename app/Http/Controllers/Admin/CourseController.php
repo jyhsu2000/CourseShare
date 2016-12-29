@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Course;
+use Webpatser\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use App\DataTables\Admin\CoursesDataTable;
-use Webpatser\Uuid\Uuid;
 
 class CourseController extends Controller
 {
