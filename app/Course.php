@@ -144,7 +144,7 @@ class Course extends Model
         $periodIds = [];
         //錯誤標記（若發生錯誤，強制清除節次資料與教師資料）
         $errorFlag = false;
-        for ($i = 0; $i < $termCount / 2; $i += 2) {
+        for ($i = 0; $i < $termCount; $i += 2) {
             try {
                 $location = $terms[$i + 1];
                 $weekdayAndPeriods = $terms[$i];
