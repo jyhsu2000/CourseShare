@@ -16,5 +16,5 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('course-table-panel', require('./components/CourseTablePanel.vue'));
 
 const app = new Vue({
-    el: 'body'
+    el: '#app'
 });
